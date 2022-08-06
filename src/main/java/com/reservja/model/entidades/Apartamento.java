@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +34,8 @@ public class Apartamento implements Serializable{
 	@Column(name = "QTD_OCUPANTES")
 	private Integer qtdOcupantes;
 	
-	@Column(name = "STATUS_APARTAMENTO")
+	@Column(name = "STATUS_APARTAMENTO", columnDefinition = "ENUM('DISPONIVEL', 'OCUPADO', 'RESERVADO')")
+	@Enumerated(EnumType.STRING)
 	private StatusApartamento statusApartamento;
 	
 	public Apartamento() {
