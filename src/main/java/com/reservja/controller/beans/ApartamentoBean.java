@@ -15,28 +15,44 @@ import com.reservja.model.persistencia.dao.ApartamentoDAO;
 @ViewScoped
 @ManagedBean(name = "apartamentoBean")
 public class ApartamentoBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
 
 	private Apartamento apartamento;
 	private List<Apartamento> listaApartamentos;
 
 	ApartamentoDAO dao = new ApartamentoDAOJPA();
 	
-	private List<StatusApartamento> enumStatus;
+	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 
 	public ApartamentoBean() {
 		apartamento = new Apartamento();
-		enumStatus = Arrays.asList(StatusApartamento.values());
 	}	
 
 	public String salvar() {
 		dao.save(apartamento);
 		apartamento = new Apartamento();
-		return "/paginas/apartamento.xhtml?faces-redirect-true";
+		return "/paginas/apartamento.xhtml?faces-redirect=true";
+	}
+	
+	public String limpar() {
+		apartamento = new Apartamento();
+		return "/paginas/apartamento.xhtml?faces-redirect=true";
 	}
 
 	public List<StatusApartamento> getStatusApartamento() {
 	    return enumStatus;
+	}
+	
+	public StatusApartamento[] getDescricao() {
+		return StatusApartamento.values();
+	}
+
+	public List<StatusApartamento> getEnumStatus() {
+		return enumStatus;
+	}
+
+	public void setEnumStatus(List<StatusApartamento> enumStatus) {
+		this.enumStatus = enumStatus;
 	}
 
 	public Apartamento getApartamento() {

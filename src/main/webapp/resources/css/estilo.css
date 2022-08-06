@@ -207,3 +207,5 @@ body {
 #cabecalho #secao a:hover {
 	text-decoration: underline;
 }
+
+.semBorda tr, .semBorda td { border: none !important; }

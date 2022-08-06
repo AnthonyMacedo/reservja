@@ -23,7 +23,7 @@ public class Apartamento implements Serializable{
 	@Column(name = "ID_APARTAMENTO")
 	private Integer idApartamento;
 	
-	@Column(name = "NUM_QUARTO")
+	@Column(name = "NUM_QUARTO", unique = true)
 	private Integer numeroQuarto;	
 	
 	@Column(name = "QTD_OCUPANTES")
