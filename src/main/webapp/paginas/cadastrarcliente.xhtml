@@ -1,0 +1,97 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:define name="conteudo">
+		<h:form acceptcharset="UTF-8">
+			
+			<h:inputHidden value="#{clienteBean.cliente.idCliente}" />
+				
+				<fieldset>
+					<legend>Cadastro de Cliente</legend>
+					
+						<h:panelGrid columns="2">
+					
+							<h:outputLabel value="Nome: " for="nome"/>
+								<h:panelGroup>
+									<h:inputText id="nome" size="30" value="#{clienteBean.cliente.nome}" required="true"
+										requiredMessage="É necessario informar o nome do cliente."/>
+									<h:message for="nome" errorStyle="color:red"/>
+							</h:panelGroup>
+							
+							<h:outputLabel value="Sobrenome: " for="sobrenome"/>
+								<h:panelGroup>
+									<h:inputText id="sobrenome" size="30" value="#{clienteBean.cliente.sobrenome}" required="true"
+										requiredMessage="É necessario informar o sobrenome do cliente."/>
+									<h:message for="sobrenome" errorStyle="color:red"/>
+							</h:panelGroup>	
+														
+							<h:outputLabel value="Email: " for="email"/>
+								<h:panelGroup>
+									<h:inputText id="email" size="30" value="#{clienteBean.cliente.email}" required="false" 
+										requiredMessage="É necessário informar o email."/>
+									<h:message for="email" errorStyle="color:red" />
+								</h:panelGroup>
+								
+							<h:outputLabel value="Data Nascimento: " for="dataNascimento"/>
+								<h:panelGroup>
+									<h:inputText id="dataNascimento" size="30" value="#{clienteBean.cliente.dataNascimento}" required="true" 
+										requiredMessage="É necessário informar data de nascimento."
+										 converterMessage="Data no formato inválido. Utilize dd/mm/aaaa" > 										 	
+										 	<f:convertDateTime pattern="dd/MM/yyyy" type="date" 
+										 		dateStyle="medium" locale="pt_BR" timeZone="GMT-3"/>
+										 </h:inputText>
+										 <h:message for="dataNascimento" errorStyle="color:red" />
+								</h:panelGroup>	
+									
+							<h:outputLabel value="Sexo: " for="sexo">
+								<h:selectOneMenu id="sexo" value="#{clienteBean.cliente.sexo}" >
+									<f:selectItem itemLabel="Selecione"/>
+									<f:selectItem itemValue="M" itemLabel="Masculino"/>
+									<f:selectItem itemValue="F" itemLabel="Feminino"/>
+								</h:selectOneMenu>
+							</h:outputLabel>
+							<h:outputLabel />								
+										
+						</h:panelGrid>
+						
+						
+						<hr/>
+						<h:outputText value="Endereço" />
+							<h:panelGrid columns="4">
+							
+								<h:outputLabel value="Logradouro: " for="logradouro"/>
+									<h:inputText id="logradouro" size="30" value="#{clienteBean.cliente.endereco.logradouro}"/>
+								
+								<h:outputLabel value="Complemento: " for="complemento"/>
+									<h:inputText id="complemento" size="30" value="#{clienteBean.cliente.endereco.complemento}"/>	
+								
+								<h:outputLabel value="Município: " for="municipio"/>
+									<h:inputText id="municipio" size="30" value="#{clienteBean.cliente.endereco.municipio}"/>	
+									
+								<h:outputLabel value="Bairro: " for="bairro"/>
+									<h:inputText id="bairro" size="30" value="#{clienteBean.cliente.endereco.bairro}"/>	
+									
+								<h:outputLabel value="Estado: " for="estado"/>
+									<h:inputText id="estado" size="30" value="#{clienteBean.cliente.endereco.estado}"/>	
+									
+							</h:panelGrid>
+						
+						<h:panelGroup>	
+						
+							<h:commandButton value="Salvar" action="#{clienteBean.salvar}" />
+							<h:commandButton value="Limpar" type="reset" />
+							
+						</h:panelGroup>
+				</fieldset>
+			
+		</h:form>
+	
+	</ui:define>
+	
+								
+</ui:composition>

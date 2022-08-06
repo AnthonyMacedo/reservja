@@ -1,0 +1,209 @@
+body {
+	font-family: "Arial", "Times New Roman", serif;
+	font-size: 110%;
+	margin: 0;
+	padding: 0;
+	background: #ffffff;
+	text-align: justify;
+}
+
+#cabecalho {
+	width: auto;
+	height: 100px;
+	margin: 0 auto;
+	font-size: 60px;
+	color: #0080ff;
+}
+
+#cabecalho h1 {
+	color: #0080ff;
+	padding: 10px;
+}
+
+#rodape {
+	width: 800px;
+	margin: 0 auto;
+	height: 50px;
+	text-align: center;
+	font-size: 11px;
+	color: #000000;
+	margin-bottom: 27px;
+}
+
+#menuLateral {
+	background: #66b3ff;
+	width: 300px;
+	color: #FFFFFF;
+	border-radius: 10px 0 0 10px;
+	border: 10px solid #ffffff;
+}
+
+#menuLateral ul {
+	margin: 10px;
+	padding: 0;
+	list-style: none;
+}
+
+#menuLateral h2 {
+	color: #ffffff;
+	width: 180px;
+	height: 32px;
+	padding-left: 10px;
+}
+
+#menuLateral li {
+	margin: 0;
+	padding: 0;
+}
+
+#menuLateral li ul {
+	margin-bottom: 40px;
+	padding: 0 15px;
+}
+
+#menuLateral li ul li {
+	margin: 0;
+	padding: 0;
+	line-height: 35px;
+	border-bottom: 1px #ffffff dashed;
+}
+
+#menuLateral a:hover {
+	text-decoration: none;
+}
+
+#menuLateral a {
+	text-decoration: none;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+#pagina {
+	width: auto;
+	margin: 0 auto;
+	background: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #cccccc;
+}
+
+#conteudo {
+	width: 1060px;
+	margin: 0;
+	color: #666666;
+	float: right;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+
+.tabela {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	box-shadow: 5px 5px 2px #888888;
+	border: 1px solid #000000;
+}
+
+.tabela table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+/*Cor alternada da linha tabela*/
+.tabela tr:nth-child(odd) {
+	background-color: #a4d1ff;
+}
+/*Cor linha tabela*/
+.tabela tr:nth-child(even) {
+	background-color: #e1f0ff;
+}
+
+.tabela td {
+	vertical-align: middle;
+	border: 1px solid #000000;
+	border-width: 1px 1px 1px 1px;
+	text-align: center;
+	padding: 7px;
+	font-size: 12px;
+	font-family: Arial;
+	font-weight: normal;
+	color: #000000;
+}
+
+.tabela tr:last-child td {
+	border-width: 1px 1px 1px 1px;
+}
+
+.tabela tr td:last-child {
+	border-width: 1px 1px 1px 1px;
+}
+
+.tabela tr:last-child td:last-child {
+	border-width: 1px 1px 1px 1px;
+}
+
+.tabela .cabecalho {
+	background: -o-linear-gradient(bottom, #5fbf00 5%, #3f7f00 100%);
+	background: -webkitgradient(linear, left top, left bottom, color-stop(0.05, #5fbf00),
+		color-stop(1, #3f7f00));
+	background: -moz-linear-gradient(center top, #5fbf00 5%, #3f7f00 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00",
+		endColorstr="#3f7f00");
+	background: -o-linear-gradient(top, #5fbf00, 3f7f00);
+	background-color: #0080ff;
+	border: 0px solid #000000;
+	text-align: center;
+	border-width: 1px 1px 1px 1px;
+	font-size: 14px;
+	font-family: Arial;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+.tabela tr:first-child td:first-child {
+	border-width: 1px 1px 1px 1px;
+}
+
+.tabela tr:first-child td:last-child {
+	border-width: 1px 1px 1px 1px;
+}
+
+#paginaLogin {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -105px;
+	margin-top: -100px;
+	width: 300px;
+	background: #e1f0ff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #cccccc;
+	padding: 20px;
+}
+
+#paginaLogin fieldset {
+	padding: 10px;
+}
+
+#paginaLogin input {
+	height: 30px;
+}
+
+#cabecalho #secao {
+	margin-top: 10px;
+	margin-right: 10px;
+	float: right ;
+	font-size: 20px;
+}
+
+#cabecalho #secao a {
+	text-decoration: none;
+	color: black;
+	font-size: 15px;
+}
+
+#cabecalho #secao a:hover {
+	text-decoration: underline;
+}

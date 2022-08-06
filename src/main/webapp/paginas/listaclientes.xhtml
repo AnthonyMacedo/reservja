@@ -1,0 +1,82 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form acceptcharset="UTF-8">
+
+			<h:dataTable value="#{clienteBean.listaClientes}" var="cliente"
+				styleClass="tabela" headerClass="cabecalho" cellpadding="10">
+
+				<f:facet name="header">
+					<h:outputText value="Clientes" />
+				</f:facet>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Código" />
+					</f:facet>
+						<h:outputText value="#{cliente.idCliente}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+						<h:outputText value="#{cliente.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Sobrenome" />
+					</f:facet>
+						<h:outputText value="#{cliente.sobrenome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email" />
+					</f:facet>
+						<h:outputText value="#{cliente.email}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data Nascimento" />
+					</f:facet>
+						<h:outputText value="#{cliente.dataNascimento}" />
+				</h:column>
+
+				<h:column>
+
+					<f:facet name="header">
+						<h:commandLink name="linktable" action="/paginas/cadastrarcliente.xhtml">
+							<h:graphicImage library="imagens" name="newdoc.png" />
+						</h:commandLink>
+					</f:facet>
+
+					<h:commandLink action="#{clienteBean.preparaAlteracao}">
+					<h:graphicImage library="imagens" name="editar.png" />
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+						
+					</h:commandLink>
+
+					<h:commandLink action="#{clienteBean.remove}">
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+						<h:graphicImage library="imagens" name="delete.png" />
+					</h:commandLink>
+
+				</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

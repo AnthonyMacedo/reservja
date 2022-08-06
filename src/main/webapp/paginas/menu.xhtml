@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:form>
+			
+		<ul>
+			<li>
+				 <h:commandLink value="Home" action="/index.xhtml" />
+			</li>
+		</ul>
+			
+		<ul>
+			<li>
+				<h2>Cadastros</h2>
+				<ul>
+					<li><h:commandLink value="Cadastrar Funcionários" action="/paginas/cadastrarfuncionario.xhtml" /></li>
+					
+					<li><h:commandLink value="Cadastrar Clientes"  action="/paginas/cadastrarcliente.xhtml"/></li>
+
+					<li><h:commandLink value="Cadastrar Apartamentos" /></li>
+				</ul>
+			</li>
+		</ul>
+
+
+		<ul>
+			<li>
+				<h2>Listagens</h2>
+				<ul>
+					<li><h:commandLink value="Clientes" action="/paginas/listaclientes.xhtml"/></li>
+
+					<li><h:commandLink value="Apartamentos" /></li>
+				</ul>
+			</li>
+		</ul>
+
+
+	</h:form>
+
+
+</ui:composition>
