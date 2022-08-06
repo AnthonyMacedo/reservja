@@ -2,7 +2,6 @@ package com.reservja.model.entidades;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,8 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.reservja.model.enums.StatusApartamento;
@@ -25,11 +22,9 @@ public class Apartamento implements Serializable{
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_APARTAMENTO")
 	private Integer idApartamento;
-
 	
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "CLIENTE")
-	private Cliente cliente;
+	@Column(name = "NUM_QUARTO")
+	private Integer numeroQuarto;	
 	
 	@Column(name = "QTD_OCUPANTES")
 	private Integer qtdOcupantes;
@@ -40,12 +35,12 @@ public class Apartamento implements Serializable{
 	
 	public Apartamento() {
 	}
-		
-	public Apartamento(Integer idApartamento, Cliente cliente, Integer qtdOcupantes,
+
+	public Apartamento(Integer idApartamento, Integer numeroQuarto, Integer qtdOcupantes,
 			StatusApartamento statusApartamento) {
 		super();
 		this.idApartamento = idApartamento;
-		this.cliente = cliente;
+		this.numeroQuarto = numeroQuarto;
 		this.qtdOcupantes = qtdOcupantes;
 		this.statusApartamento = statusApartamento;
 	}
@@ -58,12 +53,12 @@ public class Apartamento implements Serializable{
 		this.idApartamento = idApartamento;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Integer getNumeroQuarto() {
+		return numeroQuarto;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNumeroQuarto(Integer numeroQuarto) {
+		this.numeroQuarto = numeroQuarto;
 	}
 
 	public Integer getQtdOcupantes() {
@@ -106,8 +101,6 @@ public class Apartamento implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 	
 	
 }

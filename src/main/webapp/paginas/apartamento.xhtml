@@ -1,0 +1,58 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h:form acceptcharset="UTF-8">
+
+			<p:inputText id="idHidden" type="hidden"
+				value="#{apartamentoBean.apartamento.idApartamento}" />
+
+			<p:fieldset>
+				<legend>Cadastro de Apartamento</legend>
+
+				<p:panelGrid columns="2">
+
+					<p:outputLabel for="apartamento" value="Número quarto:" />
+					<p:inputNumber id="apartamento"
+						value="#{apartamentoBean.apartamento.numeroQuarto}" minValue="0"
+						maxValue="80" decimalPlaces="0" />
+
+
+					<p:outputLabel for="qtdOcupantes" value="Quantidade ocupantes:" />
+					<p:inputNumber id="qtdOcupantes"
+						value="#{apartamentoBean.apartamento.qtdOcupantes}" minValue="0"
+						maxValue="6" decimalPlaces="0" />
+
+					<h:panelGroup>
+						<div class="ui-fluid formgrid grid">
+							<div class="field col-12 md:col-4">
+								<p:outputLabel for="enumStatus" value="Status:" />								
+								<p:selectOneMenu id="enumStatus" value="#{apartamentoBean.statusApartamento}">
+									<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
+									<f:selectItems  value="#{apartamentoBean.statusApartamento}" var="enumStatus" 
+										itemLabel="#{enumStatus.descricao}" itemValue="#{enumStatus}"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+					</h:panelGroup>
+				</p:panelGrid>
+				
+				<h:panelGroup>
+					<p:commandButton id="salvar" value="Salvar" action="#{apartamentoBean.salvar()}"/>		
+				</h:panelGroup>
+
+			</p:fieldset>
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
