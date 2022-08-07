@@ -1,0 +1,42 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:form acceptcharset="UTF-8">
+
+			<h:dataTable value="#{apartamentoBean.listaApartamentos}" var="apartamento"
+				styleClass="tabela" headerClass="cabecalho" cellpadding="10">
+
+				<f:facet name="header">
+					<h:outputText value="Apartamentos" />
+				</f:facet>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Número quarto" />
+					</f:facet>
+						<h:outputText value="#{apartamento.numeroQuarto}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Quantidade ocupantes" />
+					</f:facet>
+						<h:outputText value="#{apartamento.qtdOcupantes}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Status" />
+					</f:facet>
+						<h:outputText value="#{apartamento.statusApartamento}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

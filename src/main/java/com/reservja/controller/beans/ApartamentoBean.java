@@ -26,7 +26,7 @@ public class ApartamentoBean implements Serializable {
 	
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 
-	public ApartamentoBean() {
+	public ApartamentoBean() {		
 		apartamento = new Apartamento();
 	}	
 
@@ -73,6 +73,9 @@ public class ApartamentoBean implements Serializable {
 	}
 
 	public List<Apartamento> getListaApartamentos() {
+		if (this.listaApartamentos == null) {
+			this.listaApartamentos = dao.getAll(Apartamento.class);
+		}
 		return listaApartamentos;
 	}
 

@@ -24,7 +24,7 @@ public class ClienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Cliente cliente;
-	List<Cliente> listaClientes;
+	private List<Cliente> listaClientes;
 
 	ClienteDAO dao = new ClienteDAOJPA();
 
