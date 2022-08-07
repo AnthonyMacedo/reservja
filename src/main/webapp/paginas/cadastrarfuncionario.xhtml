@@ -71,7 +71,10 @@
 							<h:panelGrid columns="4">
 							
 								<h:outputLabel value="Cep " for="cep"/>
-								<h:inputText id="cep" size="30" value="#{funcionarioBean.funcionario.endereco.cep}" />
+								<h:inputText id="cep" size="30" value="#{funcionarioBean.funcionario.endereco.cep}" >
+									<f:ajax event="blur" execute="@this" listener="#{funcionarioBean.pesquisaCep}"
+										 render="logradouro complemento municipio bairro uf"/>	
+								</h:inputText>
 								
 								<h:outputLabel value="Logradouro: " for="logradouro"/>
 									<h:inputText id="logradouro" size="30" value="#{funcionarioBean.funcionario.endereco.logradouro}"/>
@@ -85,8 +88,8 @@
 								<h:outputLabel value="Bairro: " for="bairro"/>
 									<h:inputText id="bairro" size="30" value="#{funcionarioBean.funcionario.endereco.bairro}"/>	
 									
-								<h:outputLabel value="Estado: " for="estado"/>
-									<h:inputText id="estado" size="30" value="#{funcionarioBean.funcionario.endereco.uf}"/>	
+								<h:outputLabel value="Estado: " for="uf"/>
+									<h:inputText id="uf" size="30" value="#{funcionarioBean.funcionario.endereco.uf}"/>	
 									
 							</h:panelGrid>
 						

@@ -59,7 +59,6 @@ public class ClienteBean implements Serializable {
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 
 		try {
-			System.out.println(cliente.getEndereco().getCep());
 			URL url = new URL("https://viacep.com.br/ws/" + cliente.getEndereco().getCep() + "/json/");
 			System.out.println(url);
 			URLConnection connection = url.openConnection();

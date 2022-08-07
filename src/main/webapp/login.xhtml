@@ -21,9 +21,9 @@
 			<legend>LOGIN</legend>
 			
 				<p:inputText value="#{loginBean.usuario}" id="usuario"
-					pt:placeholder="Usuário" />
+					pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário."/>
 				<p:password value="#{loginBean.senha}" id="senha"
-					pt:placeholder="Senha" />
+					pt:placeholder="Senha" required="true" requiredMessage="Informe o senha."/>
 					
 			<h:panelGroup>
 				<p:commandButton value="Salvar" action="#{loginBean.autentica}" />

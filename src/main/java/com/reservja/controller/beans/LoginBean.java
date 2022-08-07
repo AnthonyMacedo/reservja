@@ -26,23 +26,30 @@ public class LoginBean implements Serializable {
 	}
 
 	public String autentica() {
+		
+		try {
+			Funcionario funcionarioUser = funcionarioDAOJPA.consultarUsuario(usuario, senha);
+			
+			if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
+					&& senha.contentEquals(funcionarioUser.getSenha())) {// achou o usuário
 
-		Funcionario funcionarioUser = funcionarioDAOJPA.consultarUsuario(usuario, senha);
-
-		System.out.println(funcionarioUser.getUsuario());
-
-		if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
-				&& senha.contentEquals(funcionarioUser.getSenha())) {// achou o usuário
-
-			// adicionar o usuário na sessão usuarioLogado
-			FacesContext context = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("usuarioLogado", funcionarioUser.getUsuario());
-
-			return "/index.xhtml?faces-redirect=true";
+				// adicionar o usuário na sessão usuarioLogado
+				FacesContext context = FacesContext.getCurrentInstance();
+				ExternalContext externalContext = context.getExternalContext();
+				externalContext.getSessionMap().put("usuarioLogado", funcionarioUser.getUsuario());
+				System.out.println("Usuario logou.");
+				return "/index.xhtml?faces-redirect=true";
+			}
+			return "/login.xhtml?faces-redirect=true";
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+			System.out.println("Usuario ou senha invalido.");
+			return "";
 		}
-		return "/login.xhtml?faces-redirect=true";
 	}
+	
+		
 
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
