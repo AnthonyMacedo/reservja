@@ -7,9 +7,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="conteudo">
-
+	
+	
 		<h:form acceptcharset="UTF-8">
-
+			
+			
 			<p:inputText id="idHidden" type="hidden"
 				value="#{apartamentoBean.apartamento.idApartamento}" />
 
@@ -17,7 +19,7 @@
 				<legend>Cadastro de Apartamento</legend>
  	
 				<p:panelGrid columns="2" styleClass="semBorda">
-
+	
 					<p:outputLabel for="apartamento" value="Número do quarto:" />
 					<p:inputNumber id="apartamento"
 						value="#{apartamentoBean.apartamento.numeroQuarto}" minValue="0"

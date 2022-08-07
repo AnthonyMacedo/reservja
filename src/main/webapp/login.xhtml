@@ -18,15 +18,20 @@
 	<div id="paginaLogin">
 		<h2>LOGIN</h2>
 		<h:form>
-			<h:panelGrid columns="1">
-				<h:inputText value="#{loginBean.usuario}" id="usuario"
+			<p:panelGrid columns="1" styleClass="semBorda">
+				<p:inputText value="#{loginBean.usuario}" id="usuario"
 					pt:placeholder="Usuário" />
-				<br />
-				<h:inputSecret value="#{loginBean.senha}" id="senha"
+			
+				<p:password value="#{loginBean.senha}" id="senha"
 					pt:placeholder="Senha" />
-				<br />
-				<h:commandButton value="Salvar" action="#{loginBean.autentica}" />
-			</h:panelGrid>
+				
+				
+			</p:panelGrid>
+			<h:panelGroup>
+				<p:commandButton value="Salvar" action="#{loginBean.autentica}" />
+				&nbsp;&nbsp;
+				<p:commandButton value="Limpar" type="reset" />
+			</h:panelGroup>
 		</h:form>
 		<h:messages />
 	</div>

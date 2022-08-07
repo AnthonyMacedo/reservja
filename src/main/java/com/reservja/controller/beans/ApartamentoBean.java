@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import com.reservja.model.entidades.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
@@ -31,12 +33,19 @@ public class ApartamentoBean implements Serializable {
 	public String salvar() {
 		dao.save(apartamento);
 		apartamento = new Apartamento();
+		mostrarMsg("Cadastrado com sucesso.");
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
 	}
 	
 	public String limpar() {
 		apartamento = new Apartamento();
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
+	}
+	
+	public void mostrarMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(msg);
+		context.addMessage(null, message);
 	}
 
 	public List<StatusApartamento> getStatusApartamento() {
