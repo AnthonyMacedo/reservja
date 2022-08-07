@@ -70,6 +70,9 @@
 						<h:outputText value="Endereço" />
 							<h:panelGrid columns="4">
 							
+								<h:outputLabel value="Cep " for="cep"/>
+								<h:inputText id="cep" size="30" value="#{funcionarioBean.funcionario.endereco.cep}" />
+								
 								<h:outputLabel value="Logradouro: " for="logradouro"/>
 									<h:inputText id="logradouro" size="30" value="#{funcionarioBean.funcionario.endereco.logradouro}"/>
 								
