@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/templates/template.xhtml"
+	<ui:composition template="/WEB-INF/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -65,7 +65,10 @@
 							<h:panelGrid columns="4">
 								
 								<h:outputLabel value="Cep " for="cep"/>
-									<h:inputText id="cep" size="30" value="#{clienteBean.cliente.endereco.cep}"/>
+									<h:inputText id="cep" size="30" value="#{clienteBean.cliente.endereco.cep}">						
+										<f:ajax event="blur" execute="@this" listener="#{clienteBean.pesquisaCep}"
+										 render="logradouro complemento municipio bairro estado"/>										
+									</h:inputText>
 									
 								<h:outputLabel value="Logradouro: " for="logradouro"/>
 									<h:inputText id="logradouro" size="30" value="#{clienteBean.cliente.endereco.logradouro}"/>
@@ -80,7 +83,7 @@
 									<h:inputText id="bairro" size="30" value="#{clienteBean.cliente.endereco.bairro}"/>	
 									
 								<h:outputLabel value="Estado: " for="estado"/>
-									<h:inputText id="estado" size="30" value="#{clienteBean.cliente.endereco.estado}"/>	
+									<h:inputText id="estado" size="30" value="#{clienteBean.cliente.endereco.uf}"/>	
 									
 							</h:panelGrid>
 						

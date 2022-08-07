@@ -1,12 +1,20 @@
 package com.reservja.controller.beans;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
+import com.google.gson.Gson;
 import com.reservja.model.entidades.Cliente;
+import com.reservja.model.entidades.Endereco;
 import com.reservja.model.persistencia.ClienteDAOJPA;
 import com.reservja.model.persistencia.dao.ClienteDAO;
 
@@ -46,6 +54,41 @@ public class ClienteBean implements Serializable {
 			this.listaClientes = dao.getAll(Cliente.class);
 		}
 		return listaClientes;
+	}
+	
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+
+		try {
+			System.out.println(cliente.getEndereco().getCep());
+			URL url = new URL("https://viacep.com.br/ws/" + cliente.getEndereco().getCep() + "/json/");
+			System.out.println(url);
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+			String cep = "";
+			StringBuilder jsonCep = new StringBuilder();
+
+			while ((cep = br.readLine()) != null) {
+				jsonCep.append(cep);
+				
+			}
+			
+			Endereco gsonAux = new Gson().fromJson(jsonCep.toString(), Endereco.class); 
+			
+			System.out.println(gsonAux.getCep() + gsonAux.getLogradouro() + gsonAux.getLocalidade());
+			
+			cliente.getEndereco().setCep(gsonAux.getCep());
+			cliente.getEndereco().setLogradouro(gsonAux.getLogradouro());
+			cliente.getEndereco().setComplemento(gsonAux.getComplemento());
+			cliente.getEndereco().setBairro(gsonAux.getBairro());
+			cliente.getEndereco().setMunicipio(gsonAux.getLocalidade());
+			cliente.getEndereco().setUf(gsonAux.getUf());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 	}
 
 	public Cliente getCliente() {

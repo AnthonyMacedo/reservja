@@ -1,14 +1,22 @@
 package com.reservja.controller.beans;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.reservja.model.entidades.Endereco;
 import com.reservja.model.entidades.Funcionario;
 import com.reservja.model.persistencia.FuncionarioDAOJPA;
 import com.reservja.model.persistencia.dao.FuncionarioDAO;
@@ -85,6 +93,38 @@ public class FuncionarioBean implements Serializable {
 		HttpSession session = (HttpSession) externalContext.getSession(false);
 		session.removeAttribute("usuarioLogado");
 		return "/login.xhtml?faces-redirect=true";
+	}
+
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+
+		try {
+			System.out.println(funcionario.getEndereco().getCep());
+			URL url = new URL("https://viacep.com.br/ws/" + funcionario.getEndereco().getCep() + "/json/");
+			System.out.println(url);
+			URLConnection connection = url.openConnection();
+			InputStream is = connection.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+			String cep = "";
+			StringBuilder jsonCep = new StringBuilder();
+
+			while ((cep = br.readLine()) != null) {
+				jsonCep.append(cep);
+			}
+
+			Endereco gsonAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
+
+			funcionario.getEndereco().setCep(gsonAux.getCep());
+			funcionario.getEndereco().setLogradouro(gsonAux.getLogradouro());
+			funcionario.getEndereco().setComplemento(gsonAux.getComplemento());
+			funcionario.getEndereco().setBairro(gsonAux.getBairro());
+			funcionario.getEndereco().setMunicipio(gsonAux.getLocalidade());
+			funcionario.getEndereco().setUf(gsonAux.getUf());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 	}
 
 	public Funcionario getFuncionario() {

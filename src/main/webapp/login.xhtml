@@ -16,22 +16,21 @@
 
 <h:body>
 	<div id="paginaLogin">
-		<h2>LOGIN</h2>
 		<h:form>
-			<p:panelGrid columns="1" styleClass="semBorda">
+			
+			<legend>LOGIN</legend>
+			
 				<p:inputText value="#{loginBean.usuario}" id="usuario"
 					pt:placeholder="Usuário" />
-			
 				<p:password value="#{loginBean.senha}" id="senha"
 					pt:placeholder="Senha" />
-				
-				
-			</p:panelGrid>
+					
 			<h:panelGroup>
 				<p:commandButton value="Salvar" action="#{loginBean.autentica}" />
 				&nbsp;&nbsp;
 				<p:commandButton value="Limpar" type="reset" />
 			</h:panelGroup>
+		
 		</h:form>
 		<h:messages />
 	</div>

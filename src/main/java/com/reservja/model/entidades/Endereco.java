@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Endereco implements Serializable {
@@ -18,7 +19,7 @@ public class Endereco implements Serializable {
 	private Integer idEndereco;
 	
 	@Column(name = "CEP")
-	private Integer cep;
+	private String cep;
 
 	@Column(name = "LOGRADOURO")
 	private String logradouro;
@@ -28,36 +29,41 @@ public class Endereco implements Serializable {
 
 	@Column(name = "MUNICIPIO")
 	private String municipio;
+	
+	@Transient
+	private String localidade;
 
 	@Column(name = "BAIRRO")
 	private String bairro;
 
-	@Column(name = "ESTADO")
-	private String estado;
+	@Column(name = "UF")
+	private String uf;
 
 	public Endereco() {
 	}
 
-	public Endereco(Integer cep, String logradouro, String complemento, String municipio, String bairro, String estado) {
+	public Endereco(String cep, String logradouro, String complemento, String municipio, String localidade, String bairro, String uf) {
 		super();
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
 		this.municipio = municipio;
+		this.localidade = localidade;
 		this.bairro = bairro;
-		this.estado = estado;
+		this.uf = uf;
 	}
 
-	public Endereco(Integer idEndereco,Integer cep, String logradouro, String complemento, String municipio, String bairro,
-			String estado) {
+	public Endereco(Integer idEndereco, String cep, String logradouro, String complemento, String municipio,
+			String localidade, String bairro, String uf) {
 		super();
 		this.idEndereco = idEndereco;
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
 		this.municipio = municipio;
+		this.localidade = localidade;
 		this.bairro = bairro;
-		this.estado = estado;
+		this.uf = uf;
 	}
 
 	public Integer getIdEndereco() {
@@ -68,11 +74,11 @@ public class Endereco implements Serializable {
 		this.idEndereco = idEndereco;
 	}
 
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
@@ -99,6 +105,14 @@ public class Endereco implements Serializable {
 	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
 	}
+	
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
 
 	public String getBairro() {
 		return bairro;
@@ -108,12 +122,12 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getUf() {
+		return uf;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setUf(String estado) {
+		this.uf = estado;
 	}
 
 	@Override
