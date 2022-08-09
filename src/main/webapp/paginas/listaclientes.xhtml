@@ -10,7 +10,7 @@
 		<h:form acceptcharset="UTF-8">
 
 			<h:dataTable value="#{clienteBean.listaClientes}" var="cliente"
-				styleClass="tabela" headerClass="cabecalho" cellpadding="10">
+				styleClass="tabela" headerClass="cabecalho" cellpadding="10" >
 
 				<f:facet name="header">
 					<h:outputText value="Clientes" />
@@ -18,7 +18,7 @@
 
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Código" />
+						<h:outputText value="Id" />
 					</f:facet>
 						<h:outputText value="#{cliente.idCliente}" />
 				</h:column>
