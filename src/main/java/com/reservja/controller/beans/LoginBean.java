@@ -23,6 +23,7 @@ public class LoginBean implements Serializable {
 	private FuncionarioDAO funcionarioDAOJPA = new FuncionarioDAOJPA();
 
 	public LoginBean() {
+		
 	}
 
 	public String autentica() {

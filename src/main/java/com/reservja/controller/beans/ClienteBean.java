@@ -38,6 +38,11 @@ public class ClienteBean implements Serializable {
 		this.listaClientes = null;
 		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
 	}
+	
+	public String limpar() {
+		cliente = new Cliente();
+		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
+	}
 
 	public String remove() {
 		dao.remove(Cliente.class, cliente.getIdCliente());
@@ -64,7 +69,7 @@ public class ClienteBean implements Serializable {
 			URLConnection connection = url.openConnection();
 			InputStream is = connection.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-
+			
 			String cep = "";
 			StringBuilder jsonCep = new StringBuilder();
 

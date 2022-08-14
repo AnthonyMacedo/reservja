@@ -9,6 +9,7 @@
 	<class>com.reservja.model.entidades.Cliente</class>
 	<class>com.reservja.model.entidades.Endereco</class>
 	<class>com.reservja.model.entidades.Funcionario</class>
+	<class>com.reservja.model.entidades.Apartamento</class>
 	
 		<properties>
 		<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost/reservja?useSSL=false&amp;serverTimezone=UTC" />    <!-- link conexao com bd -->
@@ -25,6 +26,18 @@
 
 			<!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+			
+			<!-- Minimo de conexao aberta. -->
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			
+			<!-- Tempo de conexao inativa. -->
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			
+			<!-- Tempo de ociosidade antes de ser validada -->
+			<property name="hibernate.c3p0.idle_test_period" value="120"/>
+			
+			<!-- Numero total de instruções mantida em cache. -->
+			<property name="hibernate.c3p0.max_statements" value="30"/>
 			
 		</properties>
 	</persistence-unit>
