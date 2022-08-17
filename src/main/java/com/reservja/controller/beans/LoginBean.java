@@ -6,7 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import com.reservja.model.entidades.Funcionario;
 import com.reservja.model.persistencia.FuncionarioDAOJPA;
@@ -50,13 +50,20 @@ public class LoginBean implements Serializable {
 		}
 	}
 	
+	public String limpar() {
+		return "/login.xhtml?faces-redirect=true";
+	}
 		
 
 	public String logout() {
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
-		HttpSession session = (HttpSession) externalContext.getSession(false);
-		session.removeAttribute("usuarioLogado");
+		externalContext.getSessionMap().remove("usuarioLogado");
+		
+		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+		httpServletRequest.getSession().invalidate();
 		return "/login.xhtml?faces-redirect=true";
 	}
 
