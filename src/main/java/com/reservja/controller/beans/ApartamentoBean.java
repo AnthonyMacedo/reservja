@@ -20,6 +20,7 @@ public class ApartamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;	
 
 	private Apartamento apartamento;
+	
 	private List<Apartamento> listaApartamentos;
 
 	ApartamentoDAO dao = new ApartamentoDAOJPA();
