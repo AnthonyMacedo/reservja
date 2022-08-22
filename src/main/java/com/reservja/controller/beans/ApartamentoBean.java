@@ -22,7 +22,7 @@ public class ApartamentoBean implements Serializable {
 	private Apartamento apartamento;
 	
 	private List<Apartamento> listaApartamentos;
-
+  
 	ApartamentoDAO dao = new ApartamentoDAOJPA();
 	
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
