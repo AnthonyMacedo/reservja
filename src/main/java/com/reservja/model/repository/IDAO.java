@@ -1,9 +1,9 @@
-package com.reservja.model.persistencia.dao;
+package com.reservja.model.repository;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface DAO<T, I extends Serializable> {
+public interface IDAO<T, I extends Serializable> {
 
 	void save(T entity);
 	

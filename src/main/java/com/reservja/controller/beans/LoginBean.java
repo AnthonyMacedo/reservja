@@ -2,37 +2,38 @@ package com.reservja.controller.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
-import com.reservja.model.entidades.Funcionario;
-import com.reservja.model.persistencia.FuncionarioDAOJPA;
-import com.reservja.model.persistencia.dao.FuncionarioDAO;
+import com.reservja.model.entity.Funcionario;
+import com.reservja.model.persistence.FuncionarioDaoImpl;
 
-@SessionScoped
-@ManagedBean(name = "loginBean")
+@RequestScoped
+@Named(value = "loginBean")
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String usuario;
+	
 	private String senha;
+	
+	@Inject
+	private FuncionarioDaoImpl funcionarioDaoImpl;
 
-	private FuncionarioDAO funcionarioDAOJPA = new FuncionarioDAOJPA();
-
-	public LoginBean() {
-		
+	public LoginBean() {	
 	}
 
 	public String autentica() {
 		
 		try {
-			Funcionario funcionarioUser = funcionarioDAOJPA.consultarUsuario(usuario, senha);
+			Funcionario funcionarioUser = funcionarioDaoImpl.consultarUsuario(usuario, senha);
 			
 			if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
-					&& senha.contentEquals(funcionarioUser.getSenha())) {// achou o usuário
+					&& senha.contentEquals(funcionarioUser.getSenha())) {
 
 				// adicionar o usuário na sessão usuarioLogado
 				FacesContext context = FacesContext.getCurrentInstance();

@@ -1,7 +1,8 @@
-package com.reservja.controller.filtros;
+package com.reservja.controller.filter;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,16 +10,21 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.reservja.controller.jpautil.JPAUtil;
 
+@WebFilter(urlPatterns = {"/*"})
 public class ControleAcesso implements Filter {
-
+	
+	@Inject
+	private JPAUtil jpaUtil;
+	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		JPAUtil.getEntityManager();
+		jpaUtil.getEntityManager();
 	}
 
 	@Override

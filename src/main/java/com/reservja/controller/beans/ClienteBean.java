@@ -8,32 +8,34 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.google.gson.Gson;
-import com.reservja.model.entidades.Cliente;
-import com.reservja.model.entidades.Endereco;
-import com.reservja.model.persistencia.ClienteDAOJPA;
-import com.reservja.model.persistencia.dao.ClienteDAO;
+import com.reservja.model.entity.Cliente;
+import com.reservja.model.entity.Endereco;
+import com.reservja.model.persistence.ClienteDaoImpl;
 
 @RequestScoped
-@ManagedBean(name = "clienteBean")
+@Named(value = "clienteBean")
 public class ClienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Cliente cliente;
+	
 	private List<Cliente> listaClientes;
 
-	ClienteDAO dao = new ClienteDAOJPA();
+	@Inject
+	private ClienteDaoImpl clienteDaoImpl;
 
 	public ClienteBean() {
 		cliente = new Cliente();
 	}
 
 	public String salvar() {
-		dao.save(cliente);
+		clienteDaoImpl.save(cliente);
 		cliente = new Cliente();
 		this.listaClientes = null;
 		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
@@ -45,18 +47,18 @@ public class ClienteBean implements Serializable {
 	}
 
 	public String remove() {
-		dao.remove(Cliente.class, cliente.getIdCliente());
+		clienteDaoImpl.remove(Cliente.class, cliente.getIdCliente());
 		return "/paginas/listaclientes.xhtml?faces-redirect=true";
 	}
 
 	public String preparaAlteracao() {
-		this.cliente = dao.getById(Cliente.class, cliente.getIdCliente());
+		this.cliente = clienteDaoImpl.getById(Cliente.class, cliente.getIdCliente());
 		return "/paginas/cadastrarcliente.xhtml";
 	}
 
 	public List<Cliente> getListaClientes() {
 		if (this.listaClientes == null) {
-			this.listaClientes = dao.getAll(Cliente.class);
+			this.listaClientes = clienteDaoImpl.getAll(Cliente.class);
 		}
 		return listaClientes;
 	}

@@ -1,4 +1,4 @@
-package com.reservja.model.entidades;
+package com.reservja.model.entity;
 
 import java.io.Serializable;
 

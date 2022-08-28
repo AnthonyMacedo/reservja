@@ -39,14 +39,7 @@
 		<resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
 	</resource-env-ref>
 	
-	<filter>
-		<filter-name>ControleAcesso</filter-name>
-		<filter-class>com.reservja.controller.filtros.ControleAcesso</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>ControleAcesso</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+
 
 	<mime-mapping>
 		<extension>jsp</extension>

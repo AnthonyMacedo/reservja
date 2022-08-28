@@ -6,10 +6,10 @@
 	
 	<persistence-unit name="reservja" transaction-type="RESOURCE_LOCAL">
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-	<class>com.reservja.model.entidades.Cliente</class>
-	<class>com.reservja.model.entidades.Endereco</class>
-	<class>com.reservja.model.entidades.Funcionario</class>
-	<class>com.reservja.model.entidades.Apartamento</class>
+	<class>com.reservja.model.entity.Cliente</class>
+	<class>com.reservja.model.entity.Endereco</class>
+	<class>com.reservja.model.entity.Funcionario</class>
+	<class>com.reservja.model.entity.Apartamento</class>
 	
 		<properties>
 		<property name="javax.persistence.jdbc.url"	value="jdbc:mysql://localhost/reservja?useSSL=false&amp;serverTimezone=UTC" />    <!-- link conexao com bd -->

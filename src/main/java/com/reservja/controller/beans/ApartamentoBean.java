@@ -4,26 +4,27 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import com.reservja.model.entidades.Apartamento;
+import com.reservja.model.entity.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
-import com.reservja.model.persistencia.ApartamentoDAOJPA;
-import com.reservja.model.persistencia.dao.ApartamentoDAO;
+import com.reservja.model.persistence.ApartamentoDaoImpl;
 
-@ViewScoped
-@ManagedBean(name = "apartamentoBean")
+@RequestScoped
+@Named(value = "apartamentoBean")
 public class ApartamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;	
 
 	private Apartamento apartamento;
 	
 	private List<Apartamento> listaApartamentos;
-  
-	ApartamentoDAO dao = new ApartamentoDAOJPA();
+	
+	@Inject
+	ApartamentoDaoImpl apartamentoDaoImpl;
 	
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 
@@ -32,7 +33,7 @@ public class ApartamentoBean implements Serializable {
 	}	
 
 	public String salvar() {
-		dao.save(apartamento);
+		apartamentoDaoImpl.save(apartamento);
 		apartamento = new Apartamento();
 		mostrarMsg("Cadastrado com sucesso.");
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
@@ -75,7 +76,7 @@ public class ApartamentoBean implements Serializable {
 
 	public List<Apartamento> getListaApartamentos() {
 		if (this.listaApartamentos == null) {
-			this.listaApartamentos = dao.getAll(Apartamento.class);
+			this.listaApartamentos = apartamentoDaoImpl.getAll(Apartamento.class);
 		}
 		return listaApartamentos;
 	}
@@ -84,12 +85,12 @@ public class ApartamentoBean implements Serializable {
 		this.listaApartamentos = listaApartamentos;
 	}
 
-	public ApartamentoDAO getDao() {
-		return dao;
+	public ApartamentoDaoImpl getApartamentoDaoImpl() {
+		return apartamentoDaoImpl;
 	}
 
-	public void setDao(ApartamentoDAO dao) {
-		this.dao = dao;
+	public void setApartamentoDaoImpl(ApartamentoDaoImpl apartamentoDaoImpl) {
+		this.apartamentoDaoImpl = apartamentoDaoImpl;
 	}
 
 }

@@ -1,43 +1,41 @@
-package com.reservja.model.persistencia;
+package com.reservja.model.persistence;
 
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import com.reservja.controller.jpautil.JPAUtil;
-import com.reservja.model.persistencia.dao.DAO;
+import com.reservja.model.repository.IDAO;
 
-public class DAOJPA<T, I extends Serializable> implements DAO<T, I> {
+@Named
+public class DaoGeneric<T, I extends Serializable> implements IDAO<T, I> {
 
+	@Inject
 	private EntityManager em;
-	
-
-	public DAOJPA() {
+		
+	public DaoGeneric() {
 	}
 
 	@Override
 	public void save(T entity) {
-		em = JPAUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		em.merge(entity);
 		et.commit();
-		em.close();
 	}
 
 	@Override
 	public void remove(Class<T> classe, I pk) {
-		em = JPAUtil.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		T entity = getById(classe, pk);
 		em.remove(entity);
 		et.commit();
-		em.close();
 	}
 
 	@Override
@@ -52,7 +50,6 @@ public class DAOJPA<T, I extends Serializable> implements DAO<T, I> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll(Class<T> classe) {
-		em = JPAUtil.getEntityManager();
 		Query q = em.createQuery("select x from " + classe.getSimpleName() + " x");
 		return q.getResultList();
 	}

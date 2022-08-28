@@ -1,17 +1,20 @@
-package com.reservja.model.persistencia;
+package com.reservja.model.persistence;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import com.reservja.controller.jpautil.JPAUtil;
-import com.reservja.model.entidades.Funcionario;
-import com.reservja.model.persistencia.dao.FuncionarioDAO;
+import com.reservja.model.entity.Funcionario;
+import com.reservja.model.repository.IFuncionarioDAO;
 
-public class FuncionarioDAOJPA extends DAOJPA<Funcionario, Integer> implements FuncionarioDAO {
+@Named
+public class FuncionarioDaoImpl extends DaoGeneric<Funcionario, Integer> implements IFuncionarioDAO {
 
+	@Inject
 	private EntityManager em;
 	
-	public FuncionarioDAOJPA() {
+	public FuncionarioDaoImpl() {
 	}
 
 	@Override
@@ -19,7 +22,6 @@ public class FuncionarioDAOJPA extends DAOJPA<Funcionario, Integer> implements F
 		
 		Funcionario funcionario = null;
 		
-		em = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = em.getTransaction();
 		entityTransaction.begin();
 

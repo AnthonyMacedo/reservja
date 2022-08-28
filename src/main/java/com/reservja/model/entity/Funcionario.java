@@ -1,4 +1,4 @@
-package com.reservja.model.entidades;
+package com.reservja.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,13 +15,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Cliente implements Serializable{
+public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_CLIENTE")
-	private Integer idCliente;
+	@Column(name = "ID_FUNC")
+	private Integer idFuncionario;
 	
 	@Column(name = "NOME")
 	private String nome;
@@ -29,47 +29,58 @@ public class Cliente implements Serializable{
 	@Column(name = "SOBRENOME")
 	private String sobrenome;
 	
-	@Column(name = "SEXO")
-	private String sexo;
-	
 	@Column(name = "EMAIL")
 	private String email;
 	
 	@Column(name = "DATA_NASCIMENTO")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE) 
 	private Date dataNascimento;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ENDERECO")
 	private Endereco endereco;
 	
-	public Cliente() {	
+	@Column(unique = true, name = "USUARIO")
+	private String usuario;
+	
+	@Column(name = "SENHA")
+	private String senha;
+
+	public Funcionario() {
 		endereco = new Endereco();
 	}
-	
-	public Cliente(String nome, String sobrenome, String email, Date dataNascimento) {
+
+	public Funcionario(String nome, String sobrenome, String email, Date dataNascimento, Endereco endereco,
+			String usuario, String senha) {
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.usuario = usuario;
+		this.senha = senha;
 	}
 
-	public Cliente(Integer idCliente, String nome, String sobrenome, String email, Date dataNascimento) {
+	public Funcionario(Integer idFuncionario, String nome, String sobrenome, String email, Date dataNascimento,
+			Endereco endereco, String usuario, String senha) {
 		super();
-		this.idCliente = idCliente;
+		this.idFuncionario = idFuncionario;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.usuario = usuario;
+		this.senha = senha;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
+	public Integer getIdFuncionario() {
+		return idFuncionario;
 	}
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setIdFuncionario(Integer idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
 
 	public String getNome() {
@@ -86,14 +97,6 @@ public class Cliente implements Serializable{
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
-	}
-	
-	public String getSexo() {
-		return sexo;
-	}
-	
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
 	}
 
 	public String getEmail() {
@@ -120,11 +123,27 @@ public class Cliente implements Serializable{
 		this.endereco = endereco;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
+		result = prime * result + ((idFuncionario == null) ? 0 : idFuncionario.hashCode());
 		return result;
 	}
 
@@ -136,14 +155,13 @@ public class Cliente implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
-		if (idCliente == null) {
-			if (other.idCliente != null)
+		Funcionario other = (Funcionario) obj;
+		if (idFuncionario == null) {
+			if (other.idFuncionario != null)
 				return false;
-		} else if (!idCliente.equals(other.idCliente))
+		} else if (!idFuncionario.equals(other.idFuncionario))
 			return false;
 		return true;
 	}
-	
-	
+
 }

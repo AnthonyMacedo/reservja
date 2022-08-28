@@ -8,36 +8,37 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.reservja.model.entidades.Endereco;
-import com.reservja.model.entidades.Funcionario;
-import com.reservja.model.persistencia.FuncionarioDAOJPA;
-import com.reservja.model.persistencia.dao.FuncionarioDAO;
+import com.reservja.model.entity.Endereco;
+import com.reservja.model.entity.Funcionario;
+import com.reservja.model.persistence.FuncionarioDaoImpl;
 
-@ViewScoped
-@ManagedBean(name = "funcionarioBean")
+@RequestScoped
+@Named(value = "funcionarioBean")
 public class FuncionarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Funcionario funcionario;
+	
 	List<Funcionario> listaFuncionarios;
-
-	private FuncionarioDAOJPA funcionarioDAOJPA = new FuncionarioDAOJPA();
+	
+	@Inject
+	private FuncionarioDaoImpl funcionarioDaoImpl;
 
 	public FuncionarioBean() {
 		funcionario = new Funcionario();
 	}
 
 	public String salvar() {
-		FuncionarioDAO dao = new FuncionarioDAOJPA();
-		dao.save(funcionario);
+		funcionarioDaoImpl.save(funcionario);
 		funcionario = new Funcionario();
 		this.listaFuncionarios = null;
 		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
@@ -49,20 +50,17 @@ public class FuncionarioBean implements Serializable {
 	}
 
 	public void remove() {
-		FuncionarioDAO dao = new FuncionarioDAOJPA();
-		dao.remove(Funcionario.class, funcionario.getIdFuncionario());
+		funcionarioDaoImpl.remove(Funcionario.class, funcionario.getIdFuncionario());
 	}
 
 	public String preparaAlteracao() {
-		FuncionarioDAO dao = new FuncionarioDAOJPA();
-		this.funcionario = dao.getById(Funcionario.class, funcionario.getIdFuncionario());
+		this.funcionario = funcionarioDaoImpl.getById(Funcionario.class, funcionario.getIdFuncionario());
 		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
 	}
 
 	public List<Funcionario> getListaFuncionarios() {
 		if (this.listaFuncionarios == null) {
-			FuncionarioDAO dao = new FuncionarioDAOJPA();
-			this.listaFuncionarios = dao.getAll(Funcionario.class);
+			this.listaFuncionarios = funcionarioDaoImpl.getAll(Funcionario.class);
 		}
 		return listaFuncionarios;
 	}
@@ -70,7 +68,7 @@ public class FuncionarioBean implements Serializable {
 	@SuppressWarnings("unused")
 	public String logar() {
 
-		Funcionario funcionarioUser = funcionarioDAOJPA.consultarUsuario(funcionario.getUsuario(),
+		Funcionario funcionarioUser = funcionarioDaoImpl.consultarUsuario(funcionario.getUsuario(),
 				funcionario.getSenha());
 
 		System.out.println(funcionarioUser.getUsuario());
@@ -135,12 +133,12 @@ public class FuncionarioBean implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public FuncionarioDAOJPA getFuncionarioDAOJPA() {
-		return funcionarioDAOJPA;
+	public FuncionarioDaoImpl getFuncionarioDaoImpl() {
+		return funcionarioDaoImpl;
 	}
 
-	public void setFuncionarioDAOJPA(FuncionarioDAOJPA funcionarioDAOJPA) {
-		this.funcionarioDAOJPA = funcionarioDAOJPA;
+	public void setFuncionarioDaoImpl(FuncionarioDaoImpl funcionarioDaoImpl) {
+		this.funcionarioDaoImpl = funcionarioDaoImpl;
 	}
 
 }
