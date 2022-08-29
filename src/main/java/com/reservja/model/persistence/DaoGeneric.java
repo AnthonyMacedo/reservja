@@ -17,7 +17,7 @@ public class DaoGeneric<T, I extends Serializable> implements IDAO<T, I> {
 
 	@Inject
 	private EntityManager em;
-		
+
 	public DaoGeneric() {
 	}
 

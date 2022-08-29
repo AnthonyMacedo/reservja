@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.reservja.model.entity.Endereco;
 import com.reservja.model.entity.Funcionario;
-import com.reservja.model.persistence.FuncionarioDaoImpl;
+import com.reservja.model.repository.IFuncionarioDAO;
 
 @RequestScoped
 @Named(value = "funcionarioBean")
@@ -27,18 +27,18 @@ public class FuncionarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Funcionario funcionario;
-	
-	List<Funcionario> listaFuncionarios;
-	
+
+	private List<Funcionario> listaFuncionarios;
+
 	@Inject
-	private FuncionarioDaoImpl funcionarioDaoImpl;
+	private IFuncionarioDAO iFuncionarioDao;
 
 	public FuncionarioBean() {
 		funcionario = new Funcionario();
 	}
 
 	public String salvar() {
-		funcionarioDaoImpl.save(funcionario);
+		iFuncionarioDao.save(funcionario);
 		funcionario = new Funcionario();
 		this.listaFuncionarios = null;
 		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
@@ -50,17 +50,17 @@ public class FuncionarioBean implements Serializable {
 	}
 
 	public void remove() {
-		funcionarioDaoImpl.remove(Funcionario.class, funcionario.getIdFuncionario());
+		iFuncionarioDao.remove(Funcionario.class, funcionario.getIdFuncionario());
 	}
 
 	public String preparaAlteracao() {
-		this.funcionario = funcionarioDaoImpl.getById(Funcionario.class, funcionario.getIdFuncionario());
+		this.funcionario = iFuncionarioDao.getById(Funcionario.class, funcionario.getIdFuncionario());
 		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
 	}
 
 	public List<Funcionario> getListaFuncionarios() {
 		if (this.listaFuncionarios == null) {
-			this.listaFuncionarios = funcionarioDaoImpl.getAll(Funcionario.class);
+			this.listaFuncionarios = iFuncionarioDao.getAll(Funcionario.class);
 		}
 		return listaFuncionarios;
 	}
@@ -68,12 +68,12 @@ public class FuncionarioBean implements Serializable {
 	@SuppressWarnings("unused")
 	public String logar() {
 
-		Funcionario funcionarioUser = funcionarioDaoImpl.consultarUsuario(funcionario.getUsuario(),
+		Funcionario funcionarioUser = iFuncionarioDao.consultarUsuario(funcionario.getUsuario(),
 				funcionario.getSenha());
 
 		System.out.println(funcionarioUser.getUsuario());
 
-		if (funcionarioUser != null) {// achou o usuário
+		if (funcionarioUser != null) {
 
 			// adicionar o usuário na sessão usuarioLogado
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -133,12 +133,12 @@ public class FuncionarioBean implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public FuncionarioDaoImpl getFuncionarioDaoImpl() {
-		return funcionarioDaoImpl;
+	public IFuncionarioDAO getiFuncionarioDao() {
+		return iFuncionarioDao;
 	}
 
-	public void setFuncionarioDaoImpl(FuncionarioDaoImpl funcionarioDaoImpl) {
-		this.funcionarioDaoImpl = funcionarioDaoImpl;
+	public void setiFuncionarioDao(IFuncionarioDAO iFuncionarioDao) {
+		this.iFuncionarioDao = iFuncionarioDao;
 	}
 
 }

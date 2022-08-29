@@ -16,7 +16,7 @@ import javax.inject.Named;
 import com.google.gson.Gson;
 import com.reservja.model.entity.Cliente;
 import com.reservja.model.entity.Endereco;
-import com.reservja.model.persistence.ClienteDaoImpl;
+import com.reservja.model.repository.IClienteDAO;
 
 @RequestScoped
 @Named(value = "clienteBean")
@@ -28,14 +28,14 @@ public class ClienteBean implements Serializable {
 	private List<Cliente> listaClientes;
 
 	@Inject
-	private ClienteDaoImpl clienteDaoImpl;
+	private IClienteDAO iClienteDao;
 
 	public ClienteBean() {
 		cliente = new Cliente();
 	}
 
 	public String salvar() {
-		clienteDaoImpl.save(cliente);
+		iClienteDao.save(cliente);
 		cliente = new Cliente();
 		this.listaClientes = null;
 		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
@@ -47,18 +47,18 @@ public class ClienteBean implements Serializable {
 	}
 
 	public String remove() {
-		clienteDaoImpl.remove(Cliente.class, cliente.getIdCliente());
+		iClienteDao.remove(Cliente.class, cliente.getIdCliente());
 		return "/paginas/listaclientes.xhtml?faces-redirect=true";
 	}
 
 	public String preparaAlteracao() {
-		this.cliente = clienteDaoImpl.getById(Cliente.class, cliente.getIdCliente());
+		this.cliente = iClienteDao.getById(Cliente.class, cliente.getIdCliente());
 		return "/paginas/cadastrarcliente.xhtml";
 	}
 
 	public List<Cliente> getListaClientes() {
 		if (this.listaClientes == null) {
-			this.listaClientes = clienteDaoImpl.getAll(Cliente.class);
+			this.listaClientes = iClienteDao.getAll(Cliente.class);
 		}
 		return listaClientes;
 	}
@@ -105,4 +105,12 @@ public class ClienteBean implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public IClienteDAO getiClienteDao() {
+		return iClienteDao;
+	}
+
+	public void setiClienteDao(IClienteDAO iClienteDao) {
+		this.iClienteDao = iClienteDao;
+	}
+	
 }

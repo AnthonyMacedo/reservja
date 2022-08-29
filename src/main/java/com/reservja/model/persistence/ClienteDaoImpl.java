@@ -6,6 +6,6 @@ import com.reservja.model.entity.Cliente;
 import com.reservja.model.repository.IClienteDAO;
 
 @Named
-public class ClienteDaoImpl extends DaoGeneric<Cliente, Integer> implements IClienteDAO{
+public class ClienteDaoImpl extends DaoGeneric<Cliente, Integer> implements IClienteDAO {
 
 }

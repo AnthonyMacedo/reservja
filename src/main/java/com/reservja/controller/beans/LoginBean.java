@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import com.reservja.model.entity.Funcionario;
-import com.reservja.model.persistence.FuncionarioDaoImpl;
+import com.reservja.model.repository.IFuncionarioDAO;
 
 @RequestScoped
 @Named(value = "loginBean")
@@ -22,7 +22,7 @@ public class LoginBean implements Serializable {
 	private String senha;
 	
 	@Inject
-	private FuncionarioDaoImpl funcionarioDaoImpl;
+	private IFuncionarioDAO iFuncionarioDao;
 
 	public LoginBean() {	
 	}
@@ -30,7 +30,7 @@ public class LoginBean implements Serializable {
 	public String autentica() {
 		
 		try {
-			Funcionario funcionarioUser = funcionarioDaoImpl.consultarUsuario(usuario, senha);
+			Funcionario funcionarioUser = iFuncionarioDao.consultarUsuario(usuario, senha);
 			
 			if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
 					&& senha.contentEquals(funcionarioUser.getSenha())) {
@@ -84,4 +84,12 @@ public class LoginBean implements Serializable {
 		this.senha = senha;
 	}
 
+	public IFuncionarioDAO getiFuncionarioDao() {
+		return iFuncionarioDao;
+	}
+
+	public void setiFuncionarioDao(IFuncionarioDAO iFuncionarioDao) {
+		this.iFuncionarioDao = iFuncionarioDao;
+	}
+	
 }

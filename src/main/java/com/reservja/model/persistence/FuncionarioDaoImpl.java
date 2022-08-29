@@ -13,19 +13,22 @@ public class FuncionarioDaoImpl extends DaoGeneric<Funcionario, Integer> impleme
 
 	@Inject
 	private EntityManager em;
-	
+
 	public FuncionarioDaoImpl() {
 	}
 
 	@Override
 	public Funcionario consultarUsuario(String usuario, String senha) {
-		
+
 		Funcionario funcionario = null;
-		
+
 		EntityTransaction entityTransaction = em.getTransaction();
 		entityTransaction.begin();
 
-		funcionario = (Funcionario) em.createQuery("select f from Funcionario f where f.usuario = '" + usuario + "' and f.senha = '" + senha + "'").getSingleResult();
+		funcionario = (Funcionario) em
+				.createQuery(
+						"select f from Funcionario f where f.usuario = '" + usuario + "' and f.senha = '" + senha + "'")
+				.getSingleResult();
 
 		entityTransaction.commit();
 

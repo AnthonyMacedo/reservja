@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 import com.reservja.model.entity.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
-import com.reservja.model.persistence.ApartamentoDaoImpl;
+import com.reservja.model.repository.IApartamentoDAO;
 
 @RequestScoped
 @Named(value = "apartamentoBean")
@@ -24,7 +24,7 @@ public class ApartamentoBean implements Serializable {
 	private List<Apartamento> listaApartamentos;
 	
 	@Inject
-	ApartamentoDaoImpl apartamentoDaoImpl;
+	private IApartamentoDAO iApartamentoDao;
 	
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 
@@ -33,7 +33,7 @@ public class ApartamentoBean implements Serializable {
 	}	
 
 	public String salvar() {
-		apartamentoDaoImpl.save(apartamento);
+		iApartamentoDao.save(apartamento);
 		apartamento = new Apartamento();
 		mostrarMsg("Cadastrado com sucesso.");
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
@@ -76,7 +76,7 @@ public class ApartamentoBean implements Serializable {
 
 	public List<Apartamento> getListaApartamentos() {
 		if (this.listaApartamentos == null) {
-			this.listaApartamentos = apartamentoDaoImpl.getAll(Apartamento.class);
+			this.listaApartamentos = iApartamentoDao.getAll(Apartamento.class);
 		}
 		return listaApartamentos;
 	}
@@ -85,12 +85,14 @@ public class ApartamentoBean implements Serializable {
 		this.listaApartamentos = listaApartamentos;
 	}
 
-	public ApartamentoDaoImpl getApartamentoDaoImpl() {
-		return apartamentoDaoImpl;
+	public IApartamentoDAO getiApartamentoDao() {
+		return iApartamentoDao;
 	}
 
-	public void setApartamentoDaoImpl(ApartamentoDaoImpl apartamentoDaoImpl) {
-		this.apartamentoDaoImpl = apartamentoDaoImpl;
+	public void setiApartamentoDao(IApartamentoDAO iApartamentoDao) {
+		this.iApartamentoDao = iApartamentoDao;
 	}
+
+	
 
 }
