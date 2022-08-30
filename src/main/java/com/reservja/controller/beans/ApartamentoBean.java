@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,7 +14,7 @@ import com.reservja.model.entity.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
 import com.reservja.model.repository.IApartamentoDAO;
 
-@RequestScoped
+@ViewScoped
 @Named(value = "apartamentoBean")
 public class ApartamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;	
@@ -23,8 +23,8 @@ public class ApartamentoBean implements Serializable {
 	
 	private List<Apartamento> listaApartamentos;
 	
-	@Inject
-	private IApartamentoDAO iApartamentoDao;
+	@Inject //transient para nao deixar o atributo serializar onde gera o erro ao usar outros escopos @view @session
+	transient private IApartamentoDAO iApartamentoDao;
 	
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 

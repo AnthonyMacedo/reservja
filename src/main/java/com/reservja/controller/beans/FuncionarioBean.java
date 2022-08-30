@@ -8,10 +8,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -21,7 +21,7 @@ import com.reservja.model.entity.Endereco;
 import com.reservja.model.entity.Funcionario;
 import com.reservja.model.repository.IFuncionarioDAO;
 
-@RequestScoped
+@ViewScoped
 @Named(value = "funcionarioBean")
 public class FuncionarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +31,7 @@ public class FuncionarioBean implements Serializable {
 	private List<Funcionario> listaFuncionarios;
 
 	@Inject
-	private IFuncionarioDAO iFuncionarioDao;
+	transient private IFuncionarioDAO iFuncionarioDao;
 
 	public FuncionarioBean() {
 		funcionario = new Funcionario();

@@ -28,7 +28,7 @@ public class ClienteBean implements Serializable {
 	private List<Cliente> listaClientes;
 
 	@Inject
-	private IClienteDAO iClienteDao;
+	transient private IClienteDAO iClienteDao;
 
 	public ClienteBean() {
 		cliente = new Cliente();

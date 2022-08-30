@@ -2,7 +2,7 @@ package com.reservja.controller.beans;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.reservja.model.entity.Funcionario;
 import com.reservja.model.repository.IFuncionarioDAO;
 
-@RequestScoped
+@SessionScoped
 @Named(value = "loginBean")
 public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public class LoginBean implements Serializable {
 	private String senha;
 	
 	@Inject
-	private IFuncionarioDAO iFuncionarioDao;
+	transient private IFuncionarioDAO iFuncionarioDao;
 
 	public LoginBean() {	
 	}
@@ -84,12 +84,5 @@ public class LoginBean implements Serializable {
 		this.senha = senha;
 	}
 
-	public IFuncionarioDAO getiFuncionarioDao() {
-		return iFuncionarioDao;
-	}
-
-	public void setiFuncionarioDao(IFuncionarioDAO iFuncionarioDao) {
-		this.iFuncionarioDao = iFuncionarioDao;
-	}
 	
 }
