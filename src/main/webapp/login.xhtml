@@ -15,24 +15,33 @@
 </h:head>
 
 <h:body>
+<p:messages />
+	
+	<p:messages id="msg" showDetail="false" closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+        
 	<div id="paginaLogin">
-		<h:form>
-			
-			<legend>LOGIN</legend>
-			
-				<p:inputText value="#{loginBean.usuario}" id="usuario"
-					pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário."/>
-				<p:password value="#{loginBean.senha}" id="senha"
-					pt:placeholder="Senha" required="true" requiredMessage="Informe o senha."/>
+	
+			<h:form>
 					
-			<h:panelGroup>
-				<p:commandButton value="Salvar" action="#{loginBean.autentica}" />
-				&nbsp;&nbsp;
-				<p:commandButton value="Limpar" type="reset" />
-			</h:panelGroup>
+				<legend>LOGIN</legend>
+				
+					<p:inputText value="#{loginBean.usuario}" id="usuario"
+						pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário."/>
+						
+					<p:password value="#{loginBean.senha}" id="senha"
+						pt:placeholder="Senha" required="true" requiredMessage="Informe a senha."/>
+						
+				<h:panelGroup>
+					<p:commandButton value="Salvar" action="#{loginBean.autentica}" />
+					&nbsp;&nbsp;
+					<p:commandButton value="Limpar" type="reset" />
+				</h:panelGroup>
+			
+			</h:form>
 		
-		</h:form>
-		<h:messages />
 	</div>
+	
 </h:body>
 </html>

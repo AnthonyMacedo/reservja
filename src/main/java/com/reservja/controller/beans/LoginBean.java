@@ -3,6 +3,7 @@ package com.reservja.controller.beans;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -18,20 +19,20 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String usuario;
-	
+
 	private String senha;
-	
+
 	@Inject
 	transient private IFuncionarioDAO iFuncionarioDao;
 
-	public LoginBean() {	
+	public LoginBean() {
 	}
 
 	public String autentica() {
-		
+
 		try {
 			Funcionario funcionarioUser = iFuncionarioDao.consultarUsuario(usuario, senha);
-			
+
 			if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
 					&& senha.contentEquals(funcionarioUser.getSenha())) {
 
@@ -39,30 +40,34 @@ public class LoginBean implements Serializable {
 				FacesContext context = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = context.getExternalContext();
 				externalContext.getSessionMap().put("usuarioLogado", funcionarioUser.getUsuario());
+				 
 				System.out.println("Usuario logou.");
 				return "/index.xhtml?faces-redirect=true";
+			} else {
+				FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Usuário ou senha inválido(s)"));
 			}
+
 			return "/login.xhtml?faces-redirect=true";
-			
-		} catch (Exception e) {			
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Usuario ou senha invalido.");
 			return "";
 		}
 	}
-	
+
 	public String limpar() {
 		return "/login.xhtml?faces-redirect=true";
 	}
-		
 
 	public String logout() {
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
 		externalContext.getSessionMap().remove("usuarioLogado");
-		
-		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+		HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest();
 
 		httpServletRequest.getSession().invalidate();
 		return "/login.xhtml?faces-redirect=true";
@@ -84,5 +89,4 @@ public class LoginBean implements Serializable {
 		this.senha = senha;
 	}
 
-	
 }
