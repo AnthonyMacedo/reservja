@@ -77,7 +77,8 @@ public class LoginBean implements Serializable {
 
 		httpServletRequest.getSession().invalidate();
 		nomeFuncionario = null;
-		
+		usuario = null;
+		senha = null;		
 		return "/login.xhtml";
 	}
 
