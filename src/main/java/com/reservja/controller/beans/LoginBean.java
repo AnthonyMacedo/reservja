@@ -22,13 +22,16 @@ public class LoginBean implements Serializable {
 
 	private String senha;
 
+	private String nomeFuncionario;
+
 	@Inject
 	transient private IFuncionarioDAO iFuncionarioDao;
 
 	public LoginBean() {
+
 	}
 
-	public String autentica() {
+	public void autentica() {
 
 		try {
 			Funcionario funcionarioUser = iFuncionarioDao.consultarUsuario(usuario, senha);
@@ -36,27 +39,30 @@ public class LoginBean implements Serializable {
 			if (funcionarioUser != null && usuario.contentEquals(funcionarioUser.getUsuario())
 					&& senha.contentEquals(funcionarioUser.getSenha())) {
 
+				nomeFuncionario = funcionarioUser.getNome();
+				
 				// adicionar o usuário na sessão usuarioLogado
 				FacesContext context = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = context.getExternalContext();
 				externalContext.getSessionMap().put("usuarioLogado", funcionarioUser.getUsuario());
-				 
-				System.out.println("Usuario logou.");
-				return "/index.xhtml?faces-redirect=true";
+				
+				externalContext.redirect("/reservja/index.xhtml");
+
 			} else {
-				FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Usuário ou senha inválido(s)"));
+				usuario = null;
+				senha = null;
+				info("Usuário ou senha inválidos.");
 			}
 
-			return "/login.xhtml?faces-redirect=true";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Usuario ou senha invalido.");
-			return "";
+		} catch (Exception e) {	
+			e.getMessage();
+			System.out.println(e);
 		}
 	}
 
 	public String limpar() {
+		usuario = null;
+		senha = null;
 		return "/login.xhtml?faces-redirect=true";
 	}
 
@@ -70,7 +76,13 @@ public class LoginBean implements Serializable {
 				.getExternalContext().getRequest();
 
 		httpServletRequest.getSession().invalidate();
-		return "/login.xhtml?faces-redirect=true";
+		nomeFuncionario = null;
+		
+		return "/login.xhtml";
+	}
+
+	public void info(String mensagem) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, "Erro no login."));
 	}
 
 	public String getUsuario() {
@@ -87,6 +99,14 @@ public class LoginBean implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 
 }

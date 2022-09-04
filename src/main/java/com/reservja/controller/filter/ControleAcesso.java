@@ -32,23 +32,21 @@ public class ControleAcesso implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
+		
 		HttpSession session = req.getSession();
 
 		String usuarioLogado = (String) session.getAttribute("usuarioLogado");
-
+		
 		String url = req.getServletPath();
-		System.out.println(url);
 		
 		if ( precisaAutenticar(url) && usuarioLogado == null
 				|| (usuarioLogado != null && usuarioLogado.trim().isEmpty())) {
-			System.out.println("Filtro Invocado.");
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.xhtml");
 			dispatcher.forward(request, response);
 			return;
-		} else {
-			// executa as ações do request e do response
-			System.out.println("chain request, response");
 			
+		} else {
 			chain.doFilter(request, response);
 		}
 

@@ -10,33 +10,39 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	
 <h:head>
-	<title>ReservJa</title>
+	<title>BlueHawk</title>
 	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
 
 <h:body>
-<p:messages />
 	
-	<p:messages id="msg" showDetail="false" closable="true">
-            <p:autoUpdate/>
-        </p:messages>
+	<div id="cabecalho">
+		BlueHawk Tech
+	</div>
+
+		<p:messages showDetail="true" closable="true" >
+            <p:autoUpdate />
+        </p:messages> 
         
 	<div id="paginaLogin">
 	
 			<h:form>
 					
 				<legend>LOGIN</legend>
+					
+				<h:panelGroup>
 				
 					<p:inputText value="#{loginBean.usuario}" id="usuario"
-						pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário."/>
-						
+						pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário."/>		
+							
 					<p:password value="#{loginBean.senha}" id="senha"
 						pt:placeholder="Senha" required="true" requiredMessage="Informe a senha."/>
-						
+				</h:panelGroup>
+							
 				<h:panelGroup>
-					<p:commandButton value="Salvar" action="#{loginBean.autentica}" />
+					<p:commandButton value="Salvar"  actionListener="#{loginBean.autentica}"  ajax="false"/>
 					&nbsp;&nbsp;
-					<p:commandButton value="Limpar" type="reset" />
+					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" immediate="true"/>
 				</h:panelGroup>
 			
 			</h:form>

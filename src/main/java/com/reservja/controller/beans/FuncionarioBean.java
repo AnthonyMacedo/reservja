@@ -8,13 +8,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.reservja.model.entity.Endereco;
@@ -65,33 +62,6 @@ public class FuncionarioBean implements Serializable {
 		return listaFuncionarios;
 	}
 
-	@SuppressWarnings("unused")
-	public String logar() {
-
-		Funcionario funcionarioUser = iFuncionarioDao.consultarUsuario(funcionario.getUsuario(),
-				funcionario.getSenha());
-
-		System.out.println(funcionarioUser.getUsuario());
-
-		if (funcionarioUser != null) {
-
-			// adicionar o usuário na sessão usuarioLogado
-			FacesContext context = FacesContext.getCurrentInstance();
-			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("usuarioLogado", funcionarioUser.getUsuario());
-
-			return "index.xhtml?faces-redirect=true";
-		}
-		return "login.xhtml?faces-redirect=true";
-	}
-
-	public String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		ExternalContext externalContext = context.getExternalContext();
-		HttpSession session = (HttpSession) externalContext.getSession(false);
-		session.removeAttribute("usuarioLogado");
-		return "/login.xhtml?faces-redirect=true";
-	}
 
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 

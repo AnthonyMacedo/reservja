@@ -26,17 +26,14 @@ public class FuncionarioDaoImpl extends DaoGeneric<Funcionario, Integer> impleme
 		entityTransaction.begin();
 
 		try {
-			
-			funcionario = (Funcionario) em
-					.createQuery(
-							"select f from Funcionario f where f.usuario = '" + usuario + "' and f.senha = '" + senha + "'")
+
+			funcionario = (Funcionario) em.createQuery(
+					"select f from Funcionario f where f.usuario = '" + usuario + "' and f.senha = '" + senha + "'")
 					.getSingleResult();
-			
+
 		} catch (javax.persistence.NoResultException e) {
-			
-			System.out.println("Usuario ou senha incorretos.");
+			System.out.println(e + " / Usuário ou senha incorretos.");
 		}
-		
 
 		entityTransaction.commit();
 

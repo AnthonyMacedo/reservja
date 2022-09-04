@@ -16,12 +16,12 @@
 <h:body>
 
 	<div id="cabecalho">
-		ReservJa
+		BlueHawk Tech
 
 		<div id="secao">
 			<h:form>
 				<h:outputFormat value="Olá {0}">
-					<f:param value="#{loginBean.usuario}" />
+					<f:param value="#{loginBean.nomeFuncionario}" />
 				</h:outputFormat>
 				<br />
 				<h:commandLink value="Logout" action="#{loginBean.logout()}" />
