@@ -7,6 +7,11 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:define name="conteudo">
+	
+	<p:messages showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages> 
+		
 		<h:form acceptcharset="UTF-8">
 			
 			<h:inputHidden value="#{clienteBean.cliente.idCliente}" />
@@ -89,7 +94,7 @@
 						
 						<h:panelGroup>	
 						
-							<h:commandButton value="Salvar" action="#{clienteBean.salvar}" />
+							<h:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" />
 							<h:commandButton value="Limpar" action="#{clienteBean.limpar}" immediate="true"/>
 							
 						</h:panelGroup>

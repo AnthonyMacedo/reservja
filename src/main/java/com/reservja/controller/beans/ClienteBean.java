@@ -9,6 +9,8 @@ import java.net.URLConnection;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -34,11 +36,22 @@ public class ClienteBean implements Serializable {
 		cliente = new Cliente();
 	}
 
-	public String salvar() {
-		iClienteDao.save(cliente);
-		cliente = new Cliente();
-		this.listaClientes = null;
-		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
+	public void salvar() {
+		
+		try {
+			iClienteDao.save(cliente);
+			cliente = new Cliente();
+			this.listaClientes = null;
+			
+			msg("Cadastro concluído.");
+			
+			
+		} catch (Exception e) {
+			e.getStackTrace();			
+			System.out.println("Erro no cadastro.");
+		}
+		
+		
 	}
 	
 	public String limpar() {
@@ -95,6 +108,10 @@ public class ClienteBean implements Serializable {
 			ex.printStackTrace();
 		}
 
+	}
+	
+	public void msg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, null, msg));
 	}
 
 	public Cliente getCliente() {
