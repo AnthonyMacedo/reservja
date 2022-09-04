@@ -48,8 +48,15 @@ public class ControleAcesso implements Filter {
 			
 		} else {
 			chain.doFilter(request, response);
+		}	
+		
+		//Bloquear tela de login se tiver logado.
+		if (!precisaAutenticar(url) && usuarioLogado != null){
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.xhtml");
+			dispatcher.forward(request, response);
+			return;
 		}
-
 	}
 
 	@Override

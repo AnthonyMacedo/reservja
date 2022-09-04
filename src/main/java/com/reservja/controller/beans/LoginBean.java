@@ -51,7 +51,7 @@ public class LoginBean implements Serializable {
 			} else {
 				usuario = null;
 				senha = null;
-				info("Usuário ou senha inválidos.");
+				msg("Usuário ou senha inválidos.");
 			}
 
 		} catch (Exception e) {	
@@ -82,7 +82,7 @@ public class LoginBean implements Serializable {
 		return "/login.xhtml";
 	}
 
-	public void info(String mensagem) {
+	public void msg(String mensagem) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, "Erro no login."));
 	}
 
