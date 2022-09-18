@@ -12,9 +12,10 @@
 
 	<ui:define name="conteudo">
 	
-	
 		<h:form acceptcharset="UTF-8">
 			
+			<p:growl id="growl" showDetail="true" />
+        	<p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
 			
 			<p:inputText id="idHidden" type="hidden"
 				value="#{apartamentoBean.apartamento.idApartamento}" />
@@ -52,7 +53,8 @@
 				</p:panelGrid>
 				
 				<h:panelGroup>
-					<p:commandButton value="Salvar" action="#{apartamentoBean.salvar}" />
+					<p:commandButton value="Salvar" actionListener="#{apartamentoBean.salvar}" 
+						update="growl, @form"  styleClass="mr-2"/>
 					&nbsp;
 					<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" />		
 				</h:panelGroup>

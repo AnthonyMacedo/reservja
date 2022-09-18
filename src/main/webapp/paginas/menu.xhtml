@@ -12,41 +12,29 @@
 
 	<h:form>
 	
-	<ul>
-			<li><h:commandLink value="Home" action="/index.xhtml" /></li>
-		</ul>		
-
-		<ul>
-			<li>
-				<h2>Cadastros</h2>
-				<ul>
-					<li><p:commandLink value="Cadastrar Funcionários"
-							action="/paginas/cadastrarfuncionario.xhtml?faces-redirect=true" /></li>
-
-					<li><p:commandLink value="Cadastrar Clientes"
-							action="/paginas/cadastrarcliente.xhtml?faces-redirect=true" /></li>
-
-					<li><p:commandLink value="Cadastrar Apartamentos"
-							action="/paginas/apartamento.xhtml?faces-redirect=true" /></li>
-				</ul>
-			</li>
-		</ul>
-
-		<ul>
-			<li>
-				<h2>Listagens</h2>
-				<ul>
-					<li><p:commandLink value="Clientes"
-							action="/paginas/listaclientes.xhtml?faces-redirect=true" /></li>
-
-					<li><p:commandLink value="Apartamentos" 
-					action="/paginas/lista_apartamentos.xhtml?faces-redirect=true" /></li>
-				</ul>
-			</li>
-		</ul>
-				
-				
-				
+	<div class="card" id="centralizarMenu">
+		
+		<div id="home" class="home">
+		 <p:commandLink
+			   action="/index.xhtml?faces-redirect=true">
+			   <i class="pi pi-home"></i>
+			   <span>Home</span>
+		</p:commandLink>
+		</div>
+		
+        <p:menu style="width: 250px;">
+        	
+            <p:submenu label="Cadastros" style="color: #0000a8; font-size: 20px;">
+                <p:menuitem  value="Clientes" style="font-size: 1rem" icon="pi pi-users" url="/reservja/paginas/cadastrarcliente.xhtml"/>
+                <p:menuitem value="Funcionários" style="font-size: 1rem" icon="pi pi-user" url="/reservja/paginas/cadastrarfuncionario.xhtml"/>
+                <p:menuitem value="Apartamentos" style="font-size: 1rem" icon="pi pi-th-large" url="/reservja/paginas/apartamento.xhtml"/>
+            </p:submenu>
+            <p:submenu label="Listas" style="color: #0000a8; font-size: 20px;">
+                <p:menuitem value="Clientes" style="font-size: 1rem" icon="pi pi-list" url="/reservja//paginas/listaclientes.xhtml" />
+                <p:menuitem value="Apartamentos" style="font-size: 1rem" icon="pi pi-list" url="/reservja/paginas/lista_apartamentos.xhtml"/>
+            </p:submenu>
+        </p:menu>
+    </div>										
 				
 	</h:form>
 	

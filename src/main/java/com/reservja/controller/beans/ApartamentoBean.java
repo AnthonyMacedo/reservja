@@ -34,8 +34,9 @@ public class ApartamentoBean implements Serializable {
 
 	public String salvar() {
 		iApartamentoDao.save(apartamento);
+		msg("Apartamento cadastrado.");
 		apartamento = new Apartamento();
-		mostrarMsg("Cadastrado com sucesso.");
+		
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
 	}
 	
@@ -44,10 +45,8 @@ public class ApartamentoBean implements Serializable {
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
 	}
 	
-	public void mostrarMsg(String msg) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		FacesMessage message = new FacesMessage(msg);
-		context.addMessage(null, message);
+	public void msg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
 	}
 
 	public List<StatusApartamento> getStatusApartamento() {
