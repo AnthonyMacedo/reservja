@@ -16,7 +16,7 @@
 <h:body>
 
 	<div id="cabecalho">
-		BlueHawk Tech
+		<p:graphicImage name="logo.png" library="imagens"/>
 
 		<div id="secao">
 			<h:form>
@@ -27,9 +27,12 @@
 				<h:commandLink value="Logout" action="#{loginBean.logout()}" />
 			</h:form>
 		</div>
-
-
+		
 	</div>
+
+	<div id="menuLateral">
+			<ui:include src="/paginas/menu.xhtml" />
+	</div>	
 
 	<div id="pagina">
 
@@ -37,15 +40,9 @@
 			<ui:insert name="conteudo"></ui:insert>
 		</div>
 
-		<div id="menuLateral">
-			<ui:include src="/paginas/menu.xhtml" />
-		</div>
-
 	</div>
-
-
+	
 	<div style="clear: both">&nbsp;</div>
-
 	<div id="rodape">©2022 ANTHONY MACEDO, TODOS OS DIREITOS
 		RESERVADOS.</div>
 

@@ -26,7 +26,7 @@ public class ClienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Cliente cliente;
-	
+
 	private List<Cliente> listaClientes;
 
 	@Inject
@@ -36,24 +36,23 @@ public class ClienteBean implements Serializable {
 		cliente = new Cliente();
 	}
 
-	public void salvar() {
-		
+	public String salvar() {
+
 		try {
 			iClienteDao.save(cliente);
-			cliente = new Cliente();
 			this.listaClientes = null;
-			
-			msg("Cadastro concluído.");
-			
-			
+			msg("Cliente cadastrado.");
+			cliente = new Cliente();
+			return "/paginas/cadastrarcliente.xhtml";
+
 		} catch (Exception e) {
-			e.getStackTrace();			
+			e.getStackTrace();
 			System.out.println("Erro no cadastro.");
+			return "";
 		}
-		
-		
+
 	}
-	
+
 	public String limpar() {
 		cliente = new Cliente();
 		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
@@ -75,7 +74,7 @@ public class ClienteBean implements Serializable {
 		}
 		return listaClientes;
 	}
-	
+
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 
 		try {
@@ -84,34 +83,34 @@ public class ClienteBean implements Serializable {
 			URLConnection connection = url.openConnection();
 			InputStream is = connection.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			
+
 			String cep = "";
 			StringBuilder jsonCep = new StringBuilder();
 
 			while ((cep = br.readLine()) != null) {
 				jsonCep.append(cep);
-				
+
 			}
-			
-			Endereco gsonAux = new Gson().fromJson(jsonCep.toString(), Endereco.class); 
-			
+
+			Endereco gsonAux = new Gson().fromJson(jsonCep.toString(), Endereco.class);
+
 			System.out.println(gsonAux.getCep() + gsonAux.getLogradouro() + gsonAux.getLocalidade());
-			
+
 			cliente.getEndereco().setCep(gsonAux.getCep());
 			cliente.getEndereco().setLogradouro(gsonAux.getLogradouro());
 			cliente.getEndereco().setComplemento(gsonAux.getComplemento());
 			cliente.getEndereco().setBairro(gsonAux.getBairro());
 			cliente.getEndereco().setMunicipio(gsonAux.getLocalidade());
 			cliente.getEndereco().setUf(gsonAux.getUf());
-			
+
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
 	}
-	
+
 	public void msg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, null, msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
 	}
 
 	public Cliente getCliente() {
@@ -129,5 +128,5 @@ public class ClienteBean implements Serializable {
 	public void setiClienteDao(IClienteDAO iClienteDao) {
 		this.iClienteDao = iClienteDao;
 	}
-	
+
 }

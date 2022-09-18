@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+	<div class="card crud-demo">
+		<h:form acceptcharset="UTF-8">
+				
+			<p:dataTable id="dtClientes" widgetVar="dtClientes" var="cliente" value="#{clienteBean.listaClientes}"
+            reflow="true" styleClass="products-table" 
+            rowKey="#{cliente.idCliente}" paginator="true" rows="10"  paginatorPosition="bottom">
+            
+            <f:facet name="header">
+            	<div class="products-table-header">
+                    <span style="font-weight: bold">Clientes</span>
+                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i> <p:inputText
+                            id="globalFilter" onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar	" />
+                    </span>
+                </div>
+            </f:facet> 
+	
+			<p:column headerText="Id" sortBy="#{cliente.idCliente}">
+                <h:outputText value="#{cliente.idCliente}" />
+            </p:column>
+
+			<p:column headerText="Nome" sortBy="#{cliente.nome}">
+                <h:outputText value="#{cliente.nome}" />
+            </p:column>
+			
+			<p:column headerText="Sobrenome" sortBy="#{cliente.sobrenome}">
+                <h:outputText value="#{cliente.sobrenome}" />
+            </p:column>
+            
+            <p:column headerText="Email" sortBy="#{cliente.email}">
+                <h:outputText value="#{cliente.email}" />
+            </p:column>
+            
+            <p:column headerText="Data Nascimento" sortBy="#{cliente.dataNascimento}">
+                <h:outputText value="#{cliente.dataNascimento}">
+                	<f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </p:column>
+            
+          <p:column exportable="false">
+          
+                <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary"
+                	 action="#{clienteBean.preparaAlteracao}" > 
+                   <f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+				</p:commandButton>			
+               	&#160;
+                <p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" 
+                	 action="#{clienteBean.remove}">
+                	 <f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}" />  
+                </p:commandButton>	  
+                    
+           </p:column>
+
+				
+
+			</p:dataTable>
+
+		</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

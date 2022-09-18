@@ -3,39 +3,58 @@ body {
 	font-size: 110%;
 	margin: 0;
 	padding: 0;
-	background: #ffffff;
+	background: #f3f3f3;
 	text-align: justify;
 }
 
+header {
+padding: 5px;
+margin-bottom: 20px;
+height: 30px;
+background-color: #545454;
+color: #fff;
+box-shadow: 0px 2px 2px #ccc
+}
+
+footer {
+border-top: 1px solid #ccc;
+padding: 5px 8px;
+margin-top: 20px;
+margin-bottom: 10px
+}
+
 #cabecalho {
+	background-color: white;
 	width: auto;
-	height: 100px;
+	height: 60px;
 	margin: 0 auto;
 	font-size: 60px;
-	color: #0080ff;
+	color: #075FF4;
 }
 
 #cabecalho h1 {
-	color: #0080ff;
+	color: #075FF4;
 	padding: 10px;
 }
 
 #rodape {
-	width: 800px;
+	width: auto;
 	margin: 0 auto;
-	height: 50px;
 	text-align: center;
 	font-size: 11px;
 	color: #000000;
-	margin-bottom: 27px;
 }
 
 #menuLateral {
-	background: #66b3ff;
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+	background: #075FF4;
 	width: 300px;
 	color: #FFFFFF;
-	border-radius: 10px 0 0 10px;
-	border: 10px solid #ffffff;
+	border-radius: 10px;
+	height: 550px;
+	font-size: 15px;
 }
 
 #menuLateral ul {
@@ -74,25 +93,28 @@ body {
 
 #menuLateral a {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: #ffffff;
 	font-weight: bold;
 }
 
 #pagina {
-	width: auto;
-	margin: 0 auto;
+	height: 530px;
+	margin-top: 10px;
+	margin-right: 6px;
+	padding: 10px;
+	float: right;
+	width: 1005px;	
 	background: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px #cccccc;
 }
 
 #conteudo {
-	width: 1060px;
+	width: 985px;
 	margin: 0;
 	color: #666666;
 	float: right;
-	padding-top: 10px;
-	padding-right: 20px;
+	padding: 10px;
 }
 
 .tabela {
@@ -152,7 +174,7 @@ body {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5fbf00",
 		endColorstr="#3f7f00");
 	background: -o-linear-gradient(top, #5fbf00, 3f7f00);
-	background-color: #0080ff;
+	background-color: #075FF4;
 	border: 0px solid #000000;
 	text-align: center;
 	border-width: 1px 1px 1px 1px;
@@ -174,17 +196,23 @@ body {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -105px;
-	margin-top: -100px;
-	width: 300px;
-	background: #e1f0ff;
+	margin-left: -200px;
+	margin-top: -120px;
+	width: 280px;
+	background: #2828ff;
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px #cccccc;
-	padding: 50px;
+	padding: 20px;
+	
 }
 
 #paginaLogin form {
 	padding: 10px;
+
+}
+
+#paginaLogin h5 {
+	color: white;
 
 }
 
@@ -211,3 +239,4 @@ body {
 }
 
 .semBorda tr, .semBorda td { border: none !important; }
+

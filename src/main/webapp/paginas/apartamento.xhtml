@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
 <ui:composition template="/WEB-INF/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -16,7 +20,8 @@
 				value="#{apartamentoBean.apartamento.idApartamento}" />
 
 			<p:fieldset>
-				<legend>Cadastro de Apartamento</legend>
+				<h4>Cadastro de Apartamento</h4>
+				
  	
 				<p:panelGrid columns="2" styleClass="semBorda">
 	
@@ -30,7 +35,7 @@
 					<p:inputNumber id="qtdOcupantes"
 						value="#{apartamentoBean.apartamento.qtdOcupantes}" minValue="0"
 						maxValue="6" decimalPlaces="0" />
-
+					<p:outputLabel/>
 					<h:panelGroup>
 						<div class="ui-fluid formgrid grid">
 							<div class="field col-12 md:col-4">
@@ -48,6 +53,7 @@
 				
 				<h:panelGroup>
 					<p:commandButton value="Salvar" action="#{apartamentoBean.salvar}" />
+					&nbsp;
 					<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" />		
 				</h:panelGroup>
 

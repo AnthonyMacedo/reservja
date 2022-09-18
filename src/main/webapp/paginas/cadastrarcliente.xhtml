@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
 	<ui:composition template="/WEB-INF/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -8,94 +12,93 @@
 	
 	<ui:define name="conteudo">
 	
-	<p:messages showDetail="true" closable="true">
-            <p:autoUpdate />
-        </p:messages> 
-		
-		<h:form acceptcharset="UTF-8">
-			
-			<h:inputHidden value="#{clienteBean.cliente.idCliente}" />
-				
+	   <h:form acceptcharset="UTF-8"> 
+	    
+        <p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+							
 				<fieldset>
 					<legend>Cadastro de Cliente</legend>
+					<p:inputText type="hidden" value="#{clienteBean.cliente.idCliente}" />
+						<p:panelGrid columns="2" styleClass="semBorda">
 					
-						<h:panelGrid columns="2">
-					
-							<h:outputLabel value="Nome: " for="nome"/>
+							<p:outputLabel value="Nome: " for="nome"/>
 								<h:panelGroup>
-									<h:inputText id="nome" size="30" value="#{clienteBean.cliente.nome}" required="true"
+									<p:inputText id="nome" size="30" value="#{clienteBean.cliente.nome}" required="true"
 										requiredMessage="É necessario informar o nome do cliente."/>
-									<h:message for="nome" errorStyle="color:red"/>
-							</h:panelGroup>
+									<p:message for="nome" errorStyle="color:red"/>
+								</h:panelGroup>
 							
-							<h:outputLabel value="Sobrenome: " for="sobrenome"/>
+							<p:outputLabel value="Sobrenome: " for="sobrenome"/>
 								<h:panelGroup>
-									<h:inputText id="sobrenome" size="30" value="#{clienteBean.cliente.sobrenome}" required="true"
+									<p:inputText id="sobrenome" size="30" value="#{clienteBean.cliente.sobrenome}" required="true"
 										requiredMessage="É necessario informar o sobrenome do cliente."/>
-									<h:message for="sobrenome" errorStyle="color:red"/>
-							</h:panelGroup>	
+									<p:message for="sobrenome" errorStyle="color:red"/>
+								</h:panelGroup>	
 														
-							<h:outputLabel value="Email: " for="email"/>
+							<p:outputLabel value="Email: " for="email"/>
 								<h:panelGroup>
-									<h:inputText id="email" size="30" value="#{clienteBean.cliente.email}" required="false" 
+									<p:inputText id="email" size="30" value="#{clienteBean.cliente.email}" required="false" 
 										requiredMessage="É necessário informar o email."/>
-									<h:message for="email" errorStyle="color:red" />
+									<p:message for="email" errorStyle="color:red" />
 								</h:panelGroup>
 								
-							<h:outputLabel value="Data Nascimento: " for="dataNascimento"/>
+							<p:outputLabel value="Data Nascimento: " for="dataNascimento"/>
 								<h:panelGroup>
-									<h:inputText id="dataNascimento" size="30" value="#{clienteBean.cliente.dataNascimento}" required="true" 
+									<p:inputText id="dataNascimento" size="30" value="#{clienteBean.cliente.dataNascimento}" required="true" 
 										requiredMessage="É necessário informar data de nascimento."
 										 converterMessage="Data no formato inválido. Utilize dd/mm/aaaa" > 										 	
 										 	<f:convertDateTime pattern="dd/MM/yyyy" type="date" 
 										 		dateStyle="medium" locale="pt_BR" timeZone="GMT-3"/>
-										 </h:inputText>
-										 <h:message for="dataNascimento" errorStyle="color:red" />
+									</p:inputText>
+										 <p:message for="dataNascimento" errorStyle="color:red" />
 								</h:panelGroup>	
 									
-							<h:outputLabel value="Sexo: " for="sexo">
-								<h:selectOneMenu id="sexo" value="#{clienteBean.cliente.sexo}" >
+							<p:outputLabel value="Sexo: " for="sexo">
+								<p:selectOneMenu id="sexo" value="#{clienteBean.cliente.sexo}" >
 									<f:selectItem itemLabel="Selecione"/>
 									<f:selectItem itemValue="M" itemLabel="Masculino"/>
 									<f:selectItem itemValue="F" itemLabel="Feminino"/>
-								</h:selectOneMenu>
-							</h:outputLabel>
-							<h:outputLabel />								
+								</p:selectOneMenu>
+							</p:outputLabel>
+							<p:outputLabel />								
 										
-						</h:panelGrid>
+						</p:panelGrid>
 						
 						
 						<hr/>
-						<h:outputText value="Endereço" />
-							<h:panelGrid columns="4">
+						<p:outputLabel value="Endereço" />
+							<p:panelGrid columns="4" styleClass="semBorda">
 								
-								<h:outputLabel value="Cep " for="cep"/>
-									<h:inputText id="cep" size="30" value="#{clienteBean.cliente.endereco.cep}">						
+								<p:outputLabel value="Cep " for="cep"/>
+									<p:inputText id="cep" size="25" value="#{clienteBean.cliente.endereco.cep}">						
 										<f:ajax event="blur" execute="@this" listener="#{clienteBean.pesquisaCep}"
 										 render="logradouro complemento municipio bairro estado"/>										
-									</h:inputText>
+									</p:inputText>
 									
-								<h:outputLabel value="Logradouro: " for="logradouro"/>
-									<h:inputText id="logradouro" size="30" value="#{clienteBean.cliente.endereco.logradouro}"/>
+								<p:outputLabel value="Logradouro: " for="logradouro"/>
+									<p:inputText id="logradouro" size="25" value="#{clienteBean.cliente.endereco.logradouro}"/>
 								
-								<h:outputLabel value="Complemento: " for="complemento"/>
-									<h:inputText id="complemento" size="30" value="#{clienteBean.cliente.endereco.complemento}"/>	
+								<p:outputLabel value="Complemento: " for="complemento"/>
+									<p:inputText id="complemento" size="25" value="#{clienteBean.cliente.endereco.complemento}"/>	
 								
-								<h:outputLabel value="Município: " for="municipio"/>
-									<h:inputText id="municipio" size="30" value="#{clienteBean.cliente.endereco.municipio}"/>	
+								<p:outputLabel value="Município: " for="municipio"/>
+									<p:inputText id="municipio" size="25" value="#{clienteBean.cliente.endereco.municipio}"/>	
 									
-								<h:outputLabel value="Bairro: " for="bairro"/>
-									<h:inputText id="bairro" size="30" value="#{clienteBean.cliente.endereco.bairro}"/>	
+								<p:outputLabel value="Bairro: " for="bairro"/>
+									<p:inputText id="bairro" size="25" value="#{clienteBean.cliente.endereco.bairro}"/>	
 									
-								<h:outputLabel value="Estado: " for="estado"/>
-									<h:inputText id="estado" size="30" value="#{clienteBean.cliente.endereco.uf}"/>	
+								<p:outputLabel value="Estado: " for="estado"/>
+									<p:inputText id="estado" size="25" value="#{clienteBean.cliente.endereco.uf}"/>	
 									
-							</h:panelGrid>
+							</p:panelGrid>
 						
 						<h:panelGroup>	
 						
-							<h:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" />
-							<h:commandButton value="Limpar" action="#{clienteBean.limpar}" immediate="true"/>
+							<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" 
+								update="growl, @form" styleClass="mr-2"  />
+								&nbsp;
+							<p:commandButton value="Limpar" action="#{clienteBean.limpar}" immediate="true"/>
 							
 						</h:panelGroup>
 				</fieldset>

@@ -8,6 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -35,10 +37,20 @@ public class FuncionarioBean implements Serializable {
 	}
 
 	public String salvar() {
-		iFuncionarioDao.save(funcionario);
-		funcionario = new Funcionario();
-		this.listaFuncionarios = null;
-		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
+
+		try {
+			
+			iFuncionarioDao.save(funcionario);
+			funcionario = new Funcionario();
+			this.listaFuncionarios = null;
+			msg("Funcionário cadastrado.");
+			return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+
 	}
 
 	public String limpar() {
@@ -61,7 +73,6 @@ public class FuncionarioBean implements Serializable {
 		}
 		return listaFuncionarios;
 	}
-
 
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 
@@ -93,6 +104,10 @@ public class FuncionarioBean implements Serializable {
 			ex.printStackTrace();
 		}
 
+	}
+
+	public void msg(String msg) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
 	}
 
 	public Funcionario getFuncionario() {

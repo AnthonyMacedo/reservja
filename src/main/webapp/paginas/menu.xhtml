@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -7,43 +11,43 @@
 
 
 	<h:form>
-
-		<ul>
+	
+	<ul>
 			<li><h:commandLink value="Home" action="/index.xhtml" /></li>
-		</ul>
+		</ul>		
 
 		<ul>
 			<li>
 				<h2>Cadastros</h2>
 				<ul>
-					<li><h:commandLink value="Cadastrar Funcionários"
+					<li><p:commandLink value="Cadastrar Funcionários"
 							action="/paginas/cadastrarfuncionario.xhtml?faces-redirect=true" /></li>
 
-					<li><h:commandLink value="Cadastrar Clientes"
+					<li><p:commandLink value="Cadastrar Clientes"
 							action="/paginas/cadastrarcliente.xhtml?faces-redirect=true" /></li>
 
-					<li><h:commandLink value="Cadastrar Apartamentos"
+					<li><p:commandLink value="Cadastrar Apartamentos"
 							action="/paginas/apartamento.xhtml?faces-redirect=true" /></li>
 				</ul>
 			</li>
 		</ul>
 
-
 		<ul>
 			<li>
 				<h2>Listagens</h2>
 				<ul>
-					<li><h:commandLink value="Clientes"
+					<li><p:commandLink value="Clientes"
 							action="/paginas/listaclientes.xhtml?faces-redirect=true" /></li>
 
-					<li><h:commandLink value="Apartamentos" 
+					<li><p:commandLink value="Apartamentos" 
 					action="/paginas/lista_apartamentos.xhtml?faces-redirect=true" /></li>
 				</ul>
 			</li>
 		</ul>
-
-
+				
+				
+				
+				
 	</h:form>
-
-
+	
 </ui:composition>

@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
 <ui:composition template="/WEB-INF/templates/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
@@ -7,96 +11,101 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:define name="conteudo">
-		<h:form acceptcharset="UTF-8">
+	
+	<h:form acceptcharset="UTF-8">
+	
+	<p:growl id="growl" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
 					
-			<h:inputHidden value="#{funcionarioBean.funcionario.idFuncionario}" />
+			<p:inputText type="hidden" value="#{funcionarioBean.funcionario.idFuncionario}" />
 				
 				<fieldset>
 					<legend>Cadastro de Funcionário</legend>
 					
-						<h:panelGrid columns="2">
+						<p:panelGrid columns="2" styleClass="semBorda">
 					
-							<h:outputLabel value="Nome: " for="nome"/>
+							<p:outputLabel value="Nome: " for="nome"/>
 								<h:panelGroup>
-									<h:inputText id="nome" size="30" value="#{funcionarioBean.funcionario.nome}" required="true"
+									<p:inputText id="nome" size="30" value="#{funcionarioBean.funcionario.nome}" required="true"
 										requiredMessage="É necessario informar o nome do funcionário."/>
-									<h:message for="nome" errorStyle="color:red"/>
-							</h:panelGroup>
+									<p:message for="nome" errorStyle="color:red"/>
+								</h:panelGroup>
 							
-							<h:outputLabel value="Sobrenome: " for="sobrenome"/>
+							<p:outputLabel value="Sobrenome: " for="sobrenome"/>
 								<h:panelGroup>
-									<h:inputText id="sobrenome" size="30" value="#{funcionarioBean.funcionario.sobrenome}" required="true"
+									<p:inputText id="sobrenome" size="30" value="#{funcionarioBean.funcionario.sobrenome}" required="true"
 										requiredMessage="É necessario informar o sobrenome do funcionário."/>
-									<h:message for="sobrenome" errorStyle="color:red"/>
-							</h:panelGroup>	
+									<p:message for="sobrenome" errorStyle="color:red"/>
+								</h:panelGroup>	
 							
-							<h:outputLabel value="Email: " for="email"/>
+							<p:outputLabel value="Email: " for="email"/>
 								<h:panelGroup>
-									<h:inputText id="email" size="30" value="#{funcionarioBean.funcionario.email}" required="false" 
+									<p:inputText id="email" size="30" value="#{funcionarioBean.funcionario.email}" required="false" 
 										requiredMessage="É necessário informar o email."/>
-									<h:message for="email" errorStyle="color:red" />
+									<p:message for="email" errorStyle="color:red" />
 								</h:panelGroup>
 								
-							<h:outputLabel value="Data Nascimento: " for="dataNascimento"/>
+							<p:outputLabel value="Data Nascimento: " for="dataNascimento"/>
 								<h:panelGroup>
-									<h:inputText id="dataNascimento" size="30" value="#{funcionarioBean.funcionario.dataNascimento}" required="true" 
+									<p:inputText id="dataNascimento" size="30" value="#{funcionarioBean.funcionario.dataNascimento}" required="true" 
 										requiredMessage="É necessário informar data de nascimento."
 										 converterMessage="Data no formato inválido. Utilize dd/mm/aaaa" > 										 	
 										 	<f:convertDateTime pattern="dd/MM/yyyy" type="date" 
 										 		dateStyle="medium" locale="pt_BR" timeZone="GMT-3"/>
-										 </h:inputText>
-										 <h:message for="dataNascimento" errorStyle="color:red" />
+										 </p:inputText>
+										 <p:message for="dataNascimento" errorStyle="color:red" />
 								</h:panelGroup>	
 							
 							
-							<h:outputLabel value="Usuário: " for="usuario"/>
+							<p:outputLabel value="Usuário: " for="usuario"/>
 								<h:panelGroup>
-									<h:inputText id="usuario" value="#{funcionarioBean.funcionario.usuario}" required="true"
+									<p:inputText id="usuario" value="#{funcionarioBean.funcionario.usuario}" required="true"
 										requiredMessage="É necessário informar o usuário."/>
-										<h:message for="usuario" errorStyle="color:red"/>
+										<p:message for="usuario" errorStyle="color:red"/>
 								</h:panelGroup>	
 								
-							<h:outputLabel value="Senha: " for="senha"/>
+							<p:outputLabel value="Senha: " for="senha"/>
 								<h:panelGroup>
-									<h:inputSecret id="senha" value="#{funcionarioBean.funcionario.senha}" required="true"
+									<p:password id="senha" value="#{funcionarioBean.funcionario.senha}" required="true"
 										requiredMessage="É necessário informar a senha."/>
-										<h:message for="senha" errorStyle="color:red"/>
+										<p:message for="senha" errorStyle="color:red"/>
 								</h:panelGroup>		
 										
-						</h:panelGrid>
+						</p:panelGrid>
 						
 						
 						<hr/>
-						<h:outputText value="Endereço" />
-							<h:panelGrid columns="4">
+						<p:outputLabel value="Endereço" />
+							<p:panelGrid columns="4" styleClass="semBorda">
 							
-								<h:outputLabel value="Cep " for="cep"/>
-								<h:inputText id="cep" size="30" value="#{funcionarioBean.funcionario.endereco.cep}" >
+								<p:outputLabel value="Cep " for="cep"/>
+								<p:inputText id="cep" size="23" value="#{funcionarioBean.funcionario.endereco.cep}" >
 									<f:ajax event="blur" execute="@this" listener="#{funcionarioBean.pesquisaCep}"
 										 render="logradouro complemento municipio bairro uf"/>	
-								</h:inputText>
+								</p:inputText>
 								
-								<h:outputLabel value="Logradouro: " for="logradouro"/>
-									<h:inputText id="logradouro" size="30" value="#{funcionarioBean.funcionario.endereco.logradouro}"/>
+								<p:outputLabel value="Logradouro: " for="logradouro"/>
+									<p:inputText id="logradouro" size="23" value="#{funcionarioBean.funcionario.endereco.logradouro}"/>
 								
-								<h:outputLabel value="Complemento: " for="complemento"/>
-									<h:inputText id="complemento" size="30" value="#{funcionarioBean.funcionario.endereco.complemento}"/>	
+								<p:outputLabel value="Complemento: " for="complemento"/>
+									<p:inputText id="complemento" size="23" value="#{funcionarioBean.funcionario.endereco.complemento}"/>	
 								
-								<h:outputLabel value="Município: " for="municipio"/>
-									<h:inputText id="municipio" size="30" value="#{funcionarioBean.funcionario.endereco.municipio}"/>	
+								<p:outputLabel value="Município: " for="municipio"/>
+									<p:inputText id="municipio" size="23" value="#{funcionarioBean.funcionario.endereco.municipio}"/>	
 									
-								<h:outputLabel value="Bairro: " for="bairro"/>
-									<h:inputText id="bairro" size="30" value="#{funcionarioBean.funcionario.endereco.bairro}"/>	
+								<p:outputLabel value="Bairro: " for="bairro"/>
+									<p:inputText id="bairro" size="23" value="#{funcionarioBean.funcionario.endereco.bairro}"/>	
 									
-								<h:outputLabel value="Estado: " for="uf"/>
-									<h:inputText id="uf" size="30" value="#{funcionarioBean.funcionario.endereco.uf}"/>	
+								<p:outputLabel value="Estado: " for="uf"/>
+									<p:inputText id="uf" size="23" value="#{funcionarioBean.funcionario.endereco.uf}"/>	
 									
-							</h:panelGrid>
+							</p:panelGrid>
 						
 						<h:panelGroup>	
 						
-							<h:commandButton value="Salvar" action="#{funcionarioBean.salvar}" />
-							<h:commandButton value="Limpar" type="reset" action="#{funcionarioBean.limpar}"/>
+							<p:commandButton value="Salvar" actionListener="#{funcionarioBean.salvar}" update="growl, @form" styleClass="mr-2" style="width: 10rem"/>
+							&nbsp;
+							<p:commandButton value="Limpar" type="reset" action="#{funcionarioBean.limpar}"/>
 							
 						</h:panelGroup>
 				</fieldset>
