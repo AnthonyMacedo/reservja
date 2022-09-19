@@ -24,8 +24,22 @@
 					<f:param value="#{loginBean.nomeFuncionario}" />
 				</h:outputFormat>
 				<br />
-				<h:commandLink value="Logout" action="#{loginBean.logout()}" />
+				<p:commandLink value="Logout" action="#{loginBean.logout()}" />
+								
 			</h:form>
+		
+		</div>
+		
+		<div id="data">
+		<h:form>
+			
+				
+				<p:outputLabel value="#{loginBean.data}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+				</p:outputLabel>
+				
+				
+		</h:form>
 		</div>
 		
 	</div>

@@ -13,22 +13,23 @@
 	<h:form>
 	
 	<div class="card" id="centralizarMenu">
-		
-		<div id="home" class="home">
-		 <p:commandLink
-			   action="/index.xhtml?faces-redirect=true">
-			   <i class="pi pi-home"></i>
-			   <span>Home</span>
-		</p:commandLink>
-		</div>
-		
+				
         <p:menu style="width: 250px;">
-        	
+        		
+        		
+        		<p:menuitem style="font-weight: bold; height: 15px;" value="Home" icon="pi pi-home" url="/reservja/index.xhtml"/>
+        		
             <p:submenu label="Cadastros" style="color: #0000a8; font-size: 20px;">
                 <p:menuitem  value="Clientes" style="font-size: 1rem" icon="pi pi-users" url="/reservja/paginas/cadastrarcliente.xhtml"/>
                 <p:menuitem value="Funcionários" style="font-size: 1rem" icon="pi pi-user" url="/reservja/paginas/cadastrarfuncionario.xhtml"/>
-                <p:menuitem value="Apartamentos" style="font-size: 1rem" icon="pi pi-th-large" url="/reservja/paginas/apartamento.xhtml"/>
+                <p:menuitem value="Apartamentos" style="font-size: 1rem" icon="pi pi-building" url="/reservja/paginas/apartamento.xhtml"/>
             </p:submenu>
+            
+            <p:submenu label="Reservas" style="color: #0000a8; font-size: 20px;">
+            	<p:menuitem value="Reservar Quarto" style="font-size: 1rem" icon="pi pi-check-square"/>
+            	<p:menuitem value="Cancelar Reserva" style="font-size: 1rem" icon="pi pi-times"/>
+            </p:submenu>
+            
             <p:submenu label="Listas" style="color: #0000a8; font-size: 20px;">
                 <p:menuitem value="Clientes" style="font-size: 1rem" icon="pi pi-list" url="/reservja//paginas/listaclientes.xhtml" />
                 <p:menuitem value="Apartamentos" style="font-size: 1rem" icon="pi pi-list" url="/reservja/paginas/lista_apartamentos.xhtml"/>

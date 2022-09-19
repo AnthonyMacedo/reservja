@@ -4,17 +4,16 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.reservja.model.entity.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
 import com.reservja.model.repository.IApartamentoDAO;
-
-@ViewScoped
+@RequestScoped
 @Named(value = "apartamentoBean")
 public class ApartamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;	
@@ -38,6 +37,16 @@ public class ApartamentoBean implements Serializable {
 		apartamento = new Apartamento();
 		
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
+	}
+	
+	public String remover() {
+		iApartamentoDao.remove(Apartamento.class, apartamento.getIdApartamento());
+		return "/paginas/apartamento.xhtml?faces-redirect=true";
+	}
+	
+	public String preparaAlteracao() {
+		this.apartamento = iApartamentoDao.getById(Apartamento.class, apartamento.getIdApartamento());
+		return "/paginas/apartamento.xhtml";
 	}
 	
 	public String limpar() {

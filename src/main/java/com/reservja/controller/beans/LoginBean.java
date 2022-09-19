@@ -1,6 +1,7 @@
 package com.reservja.controller.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -21,6 +22,8 @@ public class LoginBean implements Serializable {
 	private String usuario;
 
 	private String senha;
+	
+	private Date data;
 
 	private String nomeFuncionario;
 
@@ -28,7 +31,7 @@ public class LoginBean implements Serializable {
 	transient private IFuncionarioDAO iFuncionarioDao;
 
 	public LoginBean() {
-
+		data = new Date();
 	}
 
 	public void autentica() {
@@ -110,4 +113,12 @@ public class LoginBean implements Serializable {
 		this.nomeFuncionario = nomeFuncionario;
 	}
 
+	public Date getData() {	
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
 }

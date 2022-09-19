@@ -11,65 +11,78 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="conteudo">
-	<div class="card crud-demo">
 		<h:form acceptcharset="UTF-8">
-				
-			<p:dataTable id="dtClientes" widgetVar="dtClientes" var="cliente" value="#{clienteBean.listaClientes}"
-            reflow="true" styleClass="products-table" 
-            rowKey="#{cliente.idCliente}" paginator="true" rows="10"  paginatorPosition="bottom">
-            
-            <f:facet name="header">
-            	<div class="products-table-header">
-                    <span style="font-weight: bold">Clientes</span>
-                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i> <p:inputText
-                            id="globalFilter" onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar	" />
-                    </span>
-                </div>
-            </f:facet> 
-	
-			<p:column headerText="Id" sortBy="#{cliente.idCliente}">
-                <h:outputText value="#{cliente.idCliente}" />
-            </p:column>
 
-			<p:column headerText="Nome" sortBy="#{cliente.nome}">
-                <h:outputText value="#{cliente.nome}" />
-            </p:column>
-			
-			<p:column headerText="Sobrenome" sortBy="#{cliente.sobrenome}">
-                <h:outputText value="#{cliente.sobrenome}" />
-            </p:column>
-            
-            <p:column headerText="Email" sortBy="#{cliente.email}">
-                <h:outputText value="#{cliente.email}" />
-            </p:column>
-            
-            <p:column headerText="Data Nascimento" sortBy="#{cliente.dataNascimento}">
-                <h:outputText value="#{cliente.dataNascimento}">
-                	<f:convertDateTime pattern="dd/MM/yyyy"/>
-                </h:outputText>
-            </p:column>
-            
-          <p:column exportable="false">
-          
-                <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-secondary"
-                	 action="#{clienteBean.preparaAlteracao}" > 
-                   <f:setPropertyActionListener value="#{cliente}"
+			<h:dataTable value="#{clienteBean.listaClientes}" var="cliente"
+				styleClass="tabela" headerClass="cabecalho" cellpadding="10" >
+
+				<f:facet name="header">
+					<h:outputText value="Clientes" />
+				</f:facet>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id" />
+					</f:facet>
+						<h:outputText value="#{cliente.idCliente}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+						<h:outputText value="#{cliente.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Sobrenome" />
+					</f:facet>
+						<h:outputText value="#{cliente.sobrenome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email" />
+					</f:facet>
+						<h:outputText value="#{cliente.email}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data Nascimento" />
+					</f:facet>
+						<h:outputText value="#{cliente.dataNascimento}"> 
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+				</h:column>
+
+				<h:column>
+
+					<f:facet name="header">
+						<h:commandLink name="linktable" action="/paginas/cadastrarcliente.xhtml">
+							<h:graphicImage library="imagens" name="newdoc.png" />
+						</h:commandLink>
+					</f:facet>
+
+					<h:commandLink action="#{clienteBean.preparaAlteracao}">
+					<h:graphicImage library="imagens" name="editar.png" />
+						<f:setPropertyActionListener value="#{cliente}"
 							target="#{clienteBean.cliente}" />
-				</p:commandButton>			
-               	&#160;
-                <p:commandButton icon="pi pi-trash" styleClass="rounded-button ui-button-danger" 
-                	 action="#{clienteBean.remove}">
-                	 <f:setPropertyActionListener value="#{cliente}" target="#{clienteBean.cliente}" />  
-                </p:commandButton>	  
-                    
-           </p:column>
+						
+					</h:commandLink>
 
-				
+					<h:commandLink action="#{clienteBean.remove}">
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.cliente}" />
+						<h:graphicImage library="imagens" name="delete.png" />
+					</h:commandLink>
 
-			</p:dataTable>
+				</h:column>
+
+			</h:dataTable>
 
 		</h:form>
-		</div>
 	</ui:define>
 
 </ui:composition>

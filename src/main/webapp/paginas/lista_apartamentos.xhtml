@@ -10,35 +10,40 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="conteudo">
+	<ui:define  name="conteudo">
 		<h:form acceptcharset="UTF-8">
-
-			<h:dataTable value="#{apartamentoBean.listaApartamentos}" var="apartamento"
-				styleClass="tabela" headerClass="cabecalho" cellpadding="10">
-
+		<div id="listaApartamento" style="width: 800px;">
+			<p:dataTable id="dtApartamentos" widgetVar="dtApartamentos" var="apartamento" value="#{apartamentoBean.listaApartamentos}"
+            reflow="true" styleClass="products-table" 
+            rowKey="#{apartamentoBean.listaApartamentos}" paginator="true" rows="10"  style="font-size: 1rem" paginatorPosition="bottom">
+			
 				<f:facet name="header">
-					<h:outputText value="Apartamentos" />
+					<p:outputLabel value="Apartamentos" />
 				</f:facet>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Número quarto" />
-					</f:facet>
-						<h:outputText value="#{apartamento.numeroQuarto}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Quantidade ocupantes" />
-					</f:facet>
-						<h:outputText value="#{apartamento.qtdOcupantes}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Status" />
-					</f:facet>
-						<h:outputText value="#{apartamento.statusApartamento}" />
-				</h:column>
-			</h:dataTable>
+				<p:column style="width: 150px" headerText="Número Quarto" sortBy="#{apartamento.numeroQuarto}">
+						<p:outputLabel value="#{apartamento.numeroQuarto}" />	
+				</p:column>
+				<p:column style="width: 150px" headerText="Qtd ocupantes" sortBy="#{apartamento.qtdOcupantes}" >
+						<p:outputLabel value="#{apartamento.qtdOcupantes}" />
+				</p:column>
+				<p:column style="width: 100px" headerText="Status" sortBy="#{apartamento.statusApartamento}">
+						<p:outputLabel value="#{apartamento.statusApartamento}" />
+				</p:column>
+				
+				<p:column style="width: 80px" exportable="false" >
+						<p:commandButton style="font-size: 1rem" icon="pi pi-pencil" action="#{apartamentoBean.preparaAlteracao}">
+						<f:setPropertyActionListener value="#{apartamento}"
+							target="#{apartamentoBean.apartamento}" />
+						</p:commandButton>
+						
+						<p:commandButton style="font-size: 1rem" icon="pi pi-trash" action="#{apartamentoBean.remover}">
+						<f:setPropertyActionListener value="#{apartamento}"
+							target="#{apartamentoBean.apartamento}" />
+						</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</div>
 		</h:form>
 	</ui:define>
 
