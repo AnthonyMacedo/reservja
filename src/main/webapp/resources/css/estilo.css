@@ -3,26 +3,11 @@ body {
 	font-size: 110%;
 	margin: 0;
 	padding: 0;
-	background: #f3f3f3;
+	background: #fcfcfc;
 	text-align: justify;
 }
 
-header {
-	padding: 5px;
-	margin-bottom: 20px;
-	height: 30px;
-	background-color: #545454;
-	color: #fff;
-	box-shadow: 0px 2px 2px #ccc
-}
-
-footer {
-	border-top: 1px solid #ccc;
-	padding: 5px 8px;
-	margin-top: 20px;
-	margin-bottom: 10px
-}
-
+/*** CABEÇALHO ***/
 #cabecalho {
 	background-color: white;
 	width: auto;
@@ -30,7 +15,7 @@ footer {
 	margin: 0 auto;
 	font-size: 60px;
 	color: #075FF4;
-}
+}	
 
 #cabecalho h1 {
 	color: #075FF4;
@@ -41,14 +26,32 @@ footer {
 	padding-left: 20px;
 }
 
+#cabecalho #secao {
+	margin-top: 10px;
+	margin-right: 35px;
+	float: right;
+	font-size: 20px;
+}
+
+#cabecalho #secao a {
+	text-decoration: none;
+	color: black;
+	font-size: 12px;
+}
+
+#cabecalho #secao a:hover {
+	text-decoration: underline;
+}
+
+/*** RODAPE ***/
 #rodape {
-	width: auto;
-	margin: 0 auto;
 	text-align: center;
 	font-size: 11px;
 	color: #000000;
+	clear: both;
 }
 
+/*** MENU LATERAL ***/
 #menuLateral {
 	margin-top: 10px;
 	margin-left: 10px;
@@ -98,7 +101,7 @@ footer {
 
 #menuLateral a:hover {
 	text-decoration: none;
-	background:  #f8f8f8!important;
+	background: #f8f8f8 !important;
 	border-radius: 3px;
 }
 
@@ -107,8 +110,9 @@ footer {
 	color: #0000a8;
 }
 
+/*** PAGINA E CONTEUDO ***/
 #pagina {
-	height: 530px;
+	height: auto;
 	margin-top: 10px;
 	margin-right: 6px;
 	padding: 10px;
@@ -125,10 +129,59 @@ footer {
 	color: #515151;
 	float: right;
 	padding: 10px;
-
-	
 }
 
+#conteudo h1 {
+	margin: 0px;
+}
+
+
+#bemvindo_index {
+	float: left;
+}
+
+#data_index {
+	float: right;
+}
+
+.fieldset {
+	border-radius: 10px;
+	border-color: #75a7fb;
+	font-size: 15px;
+}
+
+.botoes {
+	padding-top: 10px;
+}
+
+/*** PAGINA LOGIN ***/
+#paginaLogin {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -200px;
+	margin-top: -120px;
+	width: 280px;
+	background: #75a7fb;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px #cccccc;
+	padding: 20px;
+}
+
+#paginaLogin form {
+	padding: 10px;
+}
+
+#paginaLogin h5 {
+	color: white;
+}
+
+#paginaLogin input {
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+/*** TABELAS ***/
 .tabela {
 	margin: 0px;
 	padding: 0px;
@@ -209,66 +262,32 @@ footer {
 	width: auto;
 }
 
-#paginaLogin {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -200px;
-	margin-top: -120px;
-	width: 280px;
-	background: #75a7fb;
-	border-radius: 10px;
-	box-shadow: 0px 0px 10px #cccccc;
-	padding: 20px;
-}
-
-#paginaLogin form {
-	padding: 10px;
-}
-
-#paginaLogin h5 {
-	color: white;
-}
-
-#paginaLogin input {
-	height: 30px;
-	margin-bottom: 10px;
-}
-
-#cabecalho #secao {
-	margin-top: 10px;
-	margin-right: 35px;
-	float: right;
-	font-size: 20px;
-}
-
-#cabecalho #secao a {
-	text-decoration: none;
-	color: black;
-	font-size: 12px;
-}
-
-#cabecalho #data {
-	color: #5353ff;
-	font-style: italic;
-	font-size: 16px;
-	margin-top: 34px;
-	margin-right: -140px;
-	height: 20px;
-	float: right;
-}
-
-#cabecalho #secao a:hover {
-	text-decoration: underline;
-	
-}
-
 .semBorda tr, .semBorda td {
 	border: none !important;
 }
-	
-#listaApartamento table{
+
+#listaApartamento table {
 	text-align: center !important;
 	font-size: 17px;
 	align-content: center !important;
 }
+
+#centralizar-conteudo {
+	padding-left: 93px;
+}
+
+/** COR LINHA TABELA PRIMEFACES
+.first-row {
+     background-color: #ffffff !important;
+     background-image: none !important;
+     color: #000000 !important;
+}
+ 
+              
+.second-row {
+    background-color: #0000ff !important;
+    background-image: none !important;
+    color: #000000 !important;
+}
+*/
+

@@ -17,8 +17,7 @@
         <p:growl id="growl" showDetail="true" />
         <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
 							
-				<fieldset>
-					<legend>Cadastro de Cliente</legend>
+				<p:fieldset class="fieldset" legend="Cadastro de Cliente">
 					<p:inputText type="hidden" value="#{clienteBean.cliente.idCliente}" />
 						<p:panelGrid columns="2" styleClass="semBorda">
 					
@@ -93,7 +92,8 @@
 									<p:inputText id="estado" size="25" value="#{clienteBean.cliente.endereco.uf}"/>	
 									
 							</p:panelGrid>
-						
+					
+					<div class="botoes">	
 						<h:panelGroup>	
 						
 							<p:commandButton value="Salvar" actionListener="#{clienteBean.salvar}" 
@@ -102,7 +102,9 @@
 							<p:commandButton value="Limpar" action="#{clienteBean.limpar}" immediate="true"/>
 							
 						</h:panelGroup>
-				</fieldset>
+					</div>
+						
+				</p:fieldset>
 			
 		</h:form>
 	

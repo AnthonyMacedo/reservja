@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="conteudo">
+		<h:head>
+			<h:outputScript library="js" name="data_ptbr_script.js"></h:outputScript>
+		</h:head>
+
+		<h:form>
+
+			<p:fieldset legend="Reservas"
+				style="border-radius: 10px; border-color: #75a7fb; font-size: 15px;">
+
+				<p:panelGrid columns="2" styleClass="semBorda">
+
+
+					<p:outputLabel value="Cliente " for="cliente" />
+						<p:column>
+							<p:inputText id="cliente" />
+							<p:commandButton oncomplete="PF('documentDialog').show()"
+							title="Buscar Cliente" icon="pi pi-search">
+							</p:commandButton>					
+						</p:column>
+
+					<p:outputLabel value="Apartamento " for="apartamento" />
+						<p:column>
+							
+							<p:inputText id="apartamento" />
+							<p:commandButton oncomplete="PF('documentDialog').show()"
+							title="Buscar Apartamento" icon="pi pi-search">
+							</p:commandButton>
+						</p:column>
+					
+
+					<div class="field col-12 md:col-4">
+
+						<p:outputLabel />
+						<p:outputLabel for="dataInicial" value="Data Inicial" />
+						<p:datePicker id="dataInicial" showIcon="true" locale="pt_BR" />
+
+						<p:outputLabel for="dataFinal" value="Data Final" />
+						<p:datePicker id="dataFinal" showIcon="true" />
+
+					</div>
+
+				</p:panelGrid>
+
+				<div class="botoes">
+					<h:panelGroup>
+
+						<p:commandButton id="reservar" value="Reservar" />
+								&nbsp;
+								<p:commandButton id="limpar" value="Limpar" type="reset" />
+
+					</h:panelGroup>
+				</div>
+
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+
+
+</ui:composition>

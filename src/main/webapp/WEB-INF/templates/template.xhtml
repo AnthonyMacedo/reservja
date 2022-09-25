@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -8,57 +8,43 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<title>Reservja</title>
-	<h:outputStylesheet library="css" name="estilo.css" />
-</h:head>
+	<h:head>
+		<title>Reservja</title>
+		<h:outputStylesheet library="css" name="estilo.css" />
+	</h:head>
 
-<h:body>
+	<h:body>
 
-	<div id="cabecalho">
-		<p:graphicImage name="logo.png" library="imagens"/>
+		<div id="cabecalho">
+			<p:graphicImage name="logo.png" library="img"/>
 
-		<div id="secao">
-			<h:form>
-				<h:outputFormat value="Olá {0}">
-					<f:param value="#{loginBean.nomeFuncionario}" />
-				</h:outputFormat>
-				<br />
-				<p:commandLink value="Logout" action="#{loginBean.logout()}" />
-								
-			</h:form>
-		
-		</div>
-		
-		<div id="data">
-		<h:form>
+			<div id="secao">
+				<h:form>
+					<h:outputFormat value="Olá {0}">
+						<f:param value="#{loginBean.nomeFuncionario}" />
+					</h:outputFormat>
+					<br />
+					<p:commandLink value="Logout" action="#{loginBean.logout()}" />
+					
+				</h:form>
+				
+			</div>
 			
-				
-				<p:outputLabel value="#{loginBean.data}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
-				</p:outputLabel>
-				
-				
-		</h:form>
+		</div>
+
+		<div id="menuLateral">
+			<ui:include src="/paginas/menu.xhtml" />
+		</div>	
+
+		<div id="pagina">
+
+			<div id="conteudo">
+				<ui:insert name="conteudo"></ui:insert>
+			</div>
+
 		</div>
 		
-	</div>
+		<div id="rodape">©2022 ANTHONY MACEDO, TODOS OS DIREITOS RESERVADOS.</div>
 
-	<div id="menuLateral">
-			<ui:include src="/paginas/menu.xhtml" />
-	</div>	
-
-	<div id="pagina">
-
-		<div id="conteudo">
-			<ui:insert name="conteudo"></ui:insert>
-		</div>
-
-	</div>
-	
-	<div style="clear: both">&nbsp;</div>
-	<div id="rodape">©2022 ANTHONY MACEDO, TODOS OS DIREITOS
-		RESERVADOS.</div>
-
-</h:body>
-</html>
+		</h:body>
+	</html>

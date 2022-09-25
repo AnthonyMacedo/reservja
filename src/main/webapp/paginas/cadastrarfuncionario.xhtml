@@ -19,8 +19,7 @@
 					
 			<p:inputText type="hidden" value="#{funcionarioBean.funcionario.idFuncionario}" />
 				
-				<fieldset>
-					<legend>Cadastro de Funcionário</legend>
+				<p:fieldset class="fieldset" legend="Cadastro de Funcionário">
 					
 						<p:panelGrid columns="2" styleClass="semBorda">
 					
@@ -100,15 +99,18 @@
 									<p:inputText id="uf" size="23" value="#{funcionarioBean.funcionario.endereco.uf}"/>	
 									
 							</p:panelGrid>
-						
-						<h:panelGroup>	
-						
-							<p:commandButton value="Salvar" actionListener="#{funcionarioBean.salvar}" update="growl, @form" styleClass="mr-2" />
-							&nbsp;
-							<p:commandButton value="Limpar" type="reset" action="#{funcionarioBean.limpar}"/>
 							
-						</h:panelGroup>
-				</fieldset>
+						<div class="botoes">	
+							<h:panelGroup>	
+							
+								<p:commandButton value="Salvar" actionListener="#{funcionarioBean.salvar}" update="growl, @form" styleClass="mr-2" />
+								&nbsp;
+								<p:commandButton value="Limpar" type="reset" action="#{funcionarioBean.limpar}"/>
+								
+							</h:panelGroup>
+						</div>
+						
+				</p:fieldset>
 			
 		</h:form>
 	

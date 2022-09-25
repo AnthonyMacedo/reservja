@@ -20,9 +20,7 @@
 			<p:inputText id="idHidden" type="hidden"
 				value="#{apartamentoBean.apartamento.idApartamento}" />
 
-			<p:fieldset>
-				<h4>Cadastro de Apartamento</h4>
-				
+			<p:fieldset class="fieldset" legend="Cadastro de Apartamento"> 				
  	
 				<p:panelGrid columns="2" styleClass="semBorda">
 	
@@ -52,12 +50,16 @@
 					</h:panelGroup>
 				</p:panelGrid>
 				
-				<h:panelGroup>
-					<p:commandButton value="Salvar" actionListener="#{apartamentoBean.salvar}" 
-						update="growl, @form"  styleClass="mr-2"/>
-					&nbsp;
-					<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" />		
-				</h:panelGroup>
+				<div class="botoes">	
+					<h:panelGroup>
+					
+						<p:commandButton value="Salvar" actionListener="#{apartamentoBean.salvar}" 
+							update="growl, @form"  styleClass="mr-2"/>
+						&nbsp;
+						<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" />	
+							
+					</h:panelGroup>
+				</div>
 
 			</p:fieldset>
 

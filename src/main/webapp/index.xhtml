@@ -12,7 +12,19 @@
 
 	<ui:define name="conteudo">
 		<h:head></h:head>
+		
+		<div id="bemvindo_index">
 			<h1>Bem Vindo.</h1>
+		</div>		
+				<div id="data_index">	
+					<h:form>
+				Hoje é <p:outputLabel value="#{loginBean.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+						</p:outputLabel>
+					</h:form>
+				</div>		
+			
+		
 	</ui:define>
 
 
