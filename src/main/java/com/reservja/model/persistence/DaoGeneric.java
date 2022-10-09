@@ -23,10 +23,18 @@ public class DaoGeneric<T, I extends Serializable> implements IDAO<T, I> {
 
 	@Override
 	public void save(T entity) {
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.merge(entity);
-		et.commit();
+		
+		try {
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.merge(entity);
+			et.commit();
+			
+		} catch (javax.persistence.PersistenceException e) {
+			e.printStackTrace();
+			System.out.println("Erro no cadastro.");
+		}
+		
 	}
 
 	@Override

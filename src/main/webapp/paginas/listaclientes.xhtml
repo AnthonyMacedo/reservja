@@ -11,71 +11,91 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="conteudo">
-		<div class="card crud-demo" id="tabelaPrimefaces">
-			<h:form acceptcharset="UTF-8">
 
+		<div class="card crud-demo" id="tabelaPrimefaces">
+
+			<h:form acceptcharset="UTF-8">
+			
+				<p:growl id="growl" showDetail="true" />
+				
 				<p:dataTable id="dtClientes" widgetVar="dtClientes" var="cliente"
 					value="#{clienteBean.listaClientes}" reflow="true"
 					styleClass="products-table" rowKey="#{cliente.idCliente}"
 					paginator="true" rows="10" style="font-size: 1rem"
 					paginatorPosition="bottom">
+					<p:growl id="growl" showDetail="false" />
 
 					<f:facet name="header">
 						<div class="products-table-header">
 							<span style="font-weight: bold">Clientes</span> <span
-							class="filter-container ui-input-icon-left"> <i
-							class="pi pi-search"></i> <p:inputText id="globalFilter"
-							onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar	" />
-						</span>
-					</div>
-				</f:facet>
+								class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="globalFilter"
+									onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar	" />
+							</span>
+						</div>
+					</f:facet>
 
-				<p:column style="width: 37px;" headerText="Id"
-					sortBy="#{cliente.idCliente}">
-					<h:outputText value="#{cliente.idCliente}" />
-				</p:column>
+					<p:column style="width: 37px;" headerText="Id"
+						sortBy="#{cliente.idCliente}">
+						<h:outputText value="#{cliente.idCliente}" />
+					</p:column>
 
-				<p:column style="width: 85px;" headerText="Nome"
-					sortBy="#{cliente.nome}">
-					<h:outputText value="#{cliente.nome}" />
-				</p:column>
+					<p:column style="width: 85px;" headerText="Nome"
+						sortBy="#{cliente.nome}">
+						<h:outputText value="#{cliente.nome}" />
+					</p:column>
 
-				<p:column style="width: 130px;" headerText="Sobrenome"
-					sortBy="#{cliente.sobrenome}">
-					<h:outputText value="#{cliente.sobrenome}" />
-				</p:column>
+					<p:column style="width: 130px;" headerText="Sobrenome"
+						sortBy="#{cliente.sobrenome}">
+						<h:outputText value="#{cliente.sobrenome}" />
+					</p:column>
 
-				<p:column style="width: 250px;" headerText="Email"
-					sortBy="#{cliente.email}">
-					<h:outputText value="#{cliente.email}" />
-				</p:column>
+					<p:column style="width: 250px;" headerText="Email"
+						sortBy="#{cliente.email}">
+						<h:outputText value="#{cliente.email}" />
+					</p:column>
 
-				<p:column style="text-align: center;" headerText="Data Nascimento"
-					sortBy="#{cliente.dataNascimento}">
-					<h:outputText value="#{cliente.dataNascimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
-				</p:column>
+					<p:column style="text-align: center;" headerText="Data Nascimento"
+						sortBy="#{cliente.dataNascimento}">
+						<h:outputText value="#{cliente.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
 
-				<p:column style="width: 100px;" exportable="false">
+					<p:column style="width: 100px;" exportable="false">
 
-					<p:commandButton style="font-size: 1rem; color: blue;" icon="pi pi-pencil" action="#{clienteBean.preparaAlteracao}">
-						<f:setPropertyActionListener value="#{cliente}"
-							target="#{clienteBean.cliente}" />
-						</p:commandButton>
-						
-
-						<p:commandButton style="font-size: 1rem; color: #790000;" icon="pi pi-trash" action="#{clienteBean.remove}">
+						<p:commandButton style="font-size: 1rem; color: blue;"
+							icon="pi pi-pencil" action="#{clienteBean.preparaAlteracao}">
 							<f:setPropertyActionListener value="#{cliente}"
 								target="#{clienteBean.cliente}" />
-							</p:commandButton>
 
-						</p:column>
+						</p:commandButton>
 
-					</p:dataTable>
 
-				</h:form>
-			</div>
-		</ui:define>
+						<p:commandButton style="font-size: 1rem; color: #790000;"
+							icon="pi pi-trash" action="#{clienteBean.remove}"
+							update="growl">
+						<f:ajax event="click" update=":form:growl" />
+							<f:setPropertyActionListener value="#{cliente}"
+								target="#{clienteBean.cliente}" />
+							<p:confirm header="Confirmação"
+								message="Deseja excluir este registro?" icon="pi pi-info-circle" />
+						</p:commandButton>
 
-	</ui:composition>
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+							responsive="true" width="350">
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no ui-button-flat" />
+							<p:commandButton value="Sim" type="button"
+								styleClass="ui-confirmdialog-yes" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

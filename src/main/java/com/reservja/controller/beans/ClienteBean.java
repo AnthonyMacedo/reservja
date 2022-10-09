@@ -20,12 +20,16 @@ import com.reservja.model.entity.Cliente;
 import com.reservja.model.entity.Endereco;
 import com.reservja.model.repository.IClienteDAO;
 
+import org.primefaces.event.SelectEvent;
+
 @RequestScoped
 @Named(value = "clienteBean")
 public class ClienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Cliente cliente;
+	
+	private Cliente clienteSelecionado;
 
 	private List<Cliente> listaClientes;
 
@@ -47,6 +51,7 @@ public class ClienteBean implements Serializable {
 
 		} catch (Exception e) {
 			e.getStackTrace();
+			msg("Erro no cadastrado.");
 			System.out.println("Erro no cadastro.");
 			return "";
 		}
@@ -59,8 +64,17 @@ public class ClienteBean implements Serializable {
 	}
 
 	public String remove() {
-		iClienteDao.remove(Cliente.class, cliente.getIdCliente());
-		return "/paginas/listaclientes.xhtml?faces-redirect=true";
+		try {
+			iClienteDao.remove(Cliente.class, cliente.getIdCliente());
+			 msg("Registro removido.");
+			return "/paginas/listaclientes.xhtml?faces-redirect=true";
+		} catch (Exception e) {
+			e.getStackTrace();
+			msg("Falha ao remover registro.");
+			System.out.println("Erro ao remover cliente.");
+			return "/paginas/listaclientes.xhtml?faces-redirect=true";
+		}
+		
 	}
 
 	public String preparaAlteracao() {
@@ -68,13 +82,19 @@ public class ClienteBean implements Serializable {
 		return "/paginas/cadastrarcliente.xhtml";
 	}
 
+	
 	public List<Cliente> getListaClientes() {
 		if (this.listaClientes == null) {
 			this.listaClientes = iClienteDao.getAll(Cliente.class);
 		}
 		return listaClientes;
 	}
-
+		
+	/*@PostConstruct
+	public void carregarPessoas() {
+		listaClientes = iClienteDao.getAll(Cliente.class);
+	}*/
+	
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 
 		try {
@@ -108,10 +128,16 @@ public class ClienteBean implements Serializable {
 		}
 
 	}
+	
+	public void onRowSelect(SelectEvent<Cliente> event) {
+	    clienteSelecionado = event.getObject();
+	    System.out.println(clienteSelecionado.getNome());
+	}
 
 	public void msg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));
 	}
+
 
 	public Cliente getCliente() {
 		return cliente;
@@ -119,6 +145,18 @@ public class ClienteBean implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Cliente getClienteSelecionado() {
+		return clienteSelecionado;
+	}
+
+	public void setClienteSelecionado(Cliente clienteSelecionado) {
+		this.clienteSelecionado = clienteSelecionado;
+	}
+
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
 	}
 
 	public IClienteDAO getiClienteDao() {

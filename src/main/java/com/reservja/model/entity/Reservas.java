@@ -22,7 +22,6 @@ public class Reservas implements java.io.Serializable{
 	@Column(name = "ID_RESERVA")
 	private Integer idReserva;
 	
-	
 	@OneToOne
 	@JoinColumn(name = "CLIENTE")
 	private Cliente cliente;
@@ -31,11 +30,11 @@ public class Reservas implements java.io.Serializable{
 	@JoinColumn(name = "APARTAMENTO")
 	private Apartamento apartamento;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column (name = "DATA_INICIAL")
 	private Date dataInicial;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column (name = "DATA_FINAL")
 	private Date dataFinal;
 	

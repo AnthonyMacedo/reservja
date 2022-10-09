@@ -21,14 +21,14 @@
 						reflow="true" styleClass="products-table" rowIndexVar="rowIndex"
 						rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'first-row' : 'second-row'}"
 						rowKey="#{apartamentoBean.listaApartamentos}" paginator="true"
-						rows="10" style="font-size: 1rem" paginatorPosition="bottom">
+						rows="10" style="font-size: 1rem" paginatorPosition="bottom" sortMode="single" >
 
 						<f:facet name="header">
 							<p:outputLabel value="Apartamentos" />
 						</f:facet>
-
+						
 						<p:column style="width: 150px" headerText="Número Quarto"
-							sortBy="#{apartamento.numeroQuarto}">
+							sortBy="#{apartamento.numeroQuarto}" >
 							<p:outputLabel value="#{apartamento.numeroQuarto}" />
 						</p:column>
 						<p:column style="width: 150px" headerText="Qtd ocupantes"
@@ -37,7 +37,7 @@
 						</p:column>
 						<p:column style="width: 100px" headerText="Status"
 							sortBy="#{apartamento.statusApartamento}">
-							<p:outputLabel value="#{apartamento.statusApartamento}" />
+							<p:outputLabel value="#{apartamento.statusApartamento.descricao}" />
 						</p:column>
 
 						<p:column style="width: 80px" exportable="false">

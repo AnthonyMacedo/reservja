@@ -54,9 +54,9 @@
 					<h:panelGroup>
 					
 						<p:commandButton value="Salvar" actionListener="#{apartamentoBean.salvar}" 
-							update="growl, @form"  styleClass="mr-2"/>
+							update="growl, @form" styleClass="mr-2"/>
 						&nbsp;
-						<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" />	
+						<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" immediate="true" />	
 							
 					</h:panelGroup>
 				</div>

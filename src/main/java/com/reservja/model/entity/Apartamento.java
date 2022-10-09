@@ -23,13 +23,13 @@ public class Apartamento implements Serializable{
 	@Column(name = "ID_APARTAMENTO")
 	private Integer idApartamento;
 	
-	@Column(name = "NUM_QUARTO", unique = true)
+	@Column(name = "NUM_QUARTO", unique = true, nullable = false)
 	private Integer numeroQuarto;	
 	
 	@Column(name = "QTD_OCUPANTES")
 	private Integer qtdOcupantes;
 	
-	@Column(name = "STATUS_APARTAMENTO", columnDefinition = "ENUM('DISPONIVEL', 'OCUPADO', 'RESERVADO')")
+	@Column(name = "STATUS_APARTAMENTO", columnDefinition = "ENUM('Disponivel', 'Ocupado', 'Reservado')")
 	@Enumerated(EnumType.STRING)
 	private StatusApartamento statusApartamento;
 	

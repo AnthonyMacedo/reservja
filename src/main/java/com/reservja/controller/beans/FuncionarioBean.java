@@ -107,7 +107,7 @@ public class FuncionarioBean implements Serializable {
 	}
 
 	public void msg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));
 	}
 
 	public Funcionario getFuncionario() {

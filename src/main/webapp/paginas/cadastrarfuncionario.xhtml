@@ -14,8 +14,7 @@
 	
 	<h:form acceptcharset="UTF-8">
 	
-	<p:growl id="growl" showDetail="true" />
-        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+	<p:growl id="growl" showDetail="false" />
 					
 			<p:inputText type="hidden" value="#{funcionarioBean.funcionario.idFuncionario}" />
 				
@@ -27,21 +26,18 @@
 								<h:panelGroup>
 									<p:inputText id="nome" size="30" value="#{funcionarioBean.funcionario.nome}" required="true"
 										requiredMessage="É necessario informar o nome do funcionário."/>
-									<p:message for="nome" errorStyle="color:red"/>
 								</h:panelGroup>
 							
 							<p:outputLabel value="Sobrenome: " for="sobrenome"/>
 								<h:panelGroup>
 									<p:inputText id="sobrenome" size="30" value="#{funcionarioBean.funcionario.sobrenome}" required="true"
 										requiredMessage="É necessario informar o sobrenome do funcionário."/>
-									<p:message for="sobrenome" errorStyle="color:red"/>
 								</h:panelGroup>	
 							
 							<p:outputLabel value="Email: " for="email"/>
 								<h:panelGroup>
 									<p:inputText id="email" size="30" value="#{funcionarioBean.funcionario.email}" required="false" 
 										requiredMessage="É necessário informar o email."/>
-									<p:message for="email" errorStyle="color:red" />
 								</h:panelGroup>
 								
 							<p:outputLabel value="Data Nascimento: " for="dataNascimento"/>
@@ -52,7 +48,6 @@
 										 	<f:convertDateTime pattern="dd/MM/yyyy" type="date" 
 										 		dateStyle="medium" locale="pt_BR" timeZone="GMT-3"/>
 										 </p:inputText>
-										 <p:message for="dataNascimento" errorStyle="color:red" />
 								</h:panelGroup>	
 							
 							
@@ -60,14 +55,12 @@
 								<h:panelGroup>
 									<p:inputText id="usuario" value="#{funcionarioBean.funcionario.usuario}" required="true"
 										requiredMessage="É necessário informar o usuário."/>
-										<p:message for="usuario" errorStyle="color:red"/>
 								</h:panelGroup>	
 								
 							<p:outputLabel value="Senha: " for="senha"/>
 								<h:panelGroup>
 									<p:password id="senha" value="#{funcionarioBean.funcionario.senha}" required="true"
 										requiredMessage="É necessário informar a senha."/>
-										<p:message for="senha" errorStyle="color:red"/>
 								</h:panelGroup>		
 										
 						</p:panelGrid>

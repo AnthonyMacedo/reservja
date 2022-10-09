@@ -13,55 +13,96 @@ import javax.inject.Named;
 import com.reservja.model.entity.Apartamento;
 import com.reservja.model.enums.StatusApartamento;
 import com.reservja.model.repository.IApartamentoDAO;
+
 @RequestScoped
 @Named(value = "apartamentoBean")
 public class ApartamentoBean implements Serializable {
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = 1L;
 
 	private Apartamento apartamento;
-	
+
 	private List<Apartamento> listaApartamentos;
-	
-	@Inject //transient para nao deixar o atributo serializar onde gera o erro ao usar outros escopos @view @session
+
+	/*
+	 * transient para nao deixar o atributo serializar onde gera o erro ao usar
+	 * outros escopos @view @session
+	 */
+	@Inject
 	transient private IApartamentoDAO iApartamentoDao;
-	
+
 	private List<StatusApartamento> enumStatus = Arrays.asList(StatusApartamento.values());
 
-	public ApartamentoBean() {		
+	public ApartamentoBean() {
 		apartamento = new Apartamento();
-	}	
+	}
 
 	public String salvar() {
-		iApartamentoDao.save(apartamento);
-		msg("Apartamento cadastrado.");
-		apartamento = new Apartamento();
-		
-		return "/paginas/apartamento.xhtml?faces-redirect=true";
+
+		try {
+			boolean quartoCadastrado = iApartamentoDao.validarQuartoCadastrado(apartamento.getNumeroQuarto());
+
+			Apartamento seTemIdApt = iApartamentoDao.verificaSeTemId(apartamento.getNumeroQuarto());
+
+			if (quartoCadastrado == true && seTemIdApt.getIdApartamento() == apartamento.getIdApartamento()
+					&& apartamento.getNumeroQuarto().equals(seTemIdApt.getNumeroQuarto())) {
+
+				iApartamentoDao.save(apartamento);
+				msg("Cadastro alterado.");
+				apartamento = new Apartamento();
+
+				return "/paginas/apartamento.xhtml";
+
+			}
+			if (quartoCadastrado == false || seTemIdApt == null) {
+
+				iApartamentoDao.save(apartamento);
+				msg("Cadastro concluído.");
+				apartamento = new Apartamento();
+				return "/paginas/apartamento.xhtml";
+
+			} else {
+				msg("Apartamento já existe.");
+				apartamento = new Apartamento();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null;
+
 	}
-	
+
 	public String remover() {
-		iApartamentoDao.remove(Apartamento.class, apartamento.getIdApartamento());
-		return "/paginas/apartamento.xhtml?faces-redirect=true";
+		
+		try {
+			iApartamentoDao.remove(Apartamento.class, apartamento.getIdApartamento());
+			return "/paginas/lista_apartamentos.xhtml?faces-redirect=true";
+		} catch (Exception e) {
+			msg("Apartamento removido.");
+			return "/paginas/lista_apartamentos.xhtml?faces-redirect=true";
+		}
+		
 	}
-	
+
 	public String preparaAlteracao() {
 		this.apartamento = iApartamentoDao.getById(Apartamento.class, apartamento.getIdApartamento());
 		return "/paginas/apartamento.xhtml";
 	}
-	
+
 	public String limpar() {
 		apartamento = new Apartamento();
 		return "/paginas/apartamento.xhtml?faces-redirect=true";
 	}
-	
+
 	public void msg(String msg) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", msg));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, ""));
 	}
 
 	public List<StatusApartamento> getStatusApartamento() {
-	    return enumStatus;
+		return enumStatus;
 	}
-	
+
 	public StatusApartamento[] getDescricao() {
 		return StatusApartamento.values();
 	}
@@ -100,7 +141,5 @@ public class ApartamentoBean implements Serializable {
 	public void setiApartamentoDao(IApartamentoDAO iApartamentoDao) {
 		this.iApartamentoDao = iApartamentoDao;
 	}
-
-	
 
 }

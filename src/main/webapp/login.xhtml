@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,46 +9,49 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-	
+
 <h:head>
 	<title>BlueHawk</title>
 	<h:outputStylesheet library="css" name="estilo.css" />
 </h:head>
 
 <h:body>
-	
+
 	<div id="cabecalho">
-		<p:graphicImage name="logo.png" library="img"/>
+		<p:graphicImage name="logo.png" library="img" />
 	</div>
 
-		<p:messages showDetail="true" closable="true" >
-            <p:autoUpdate />
-        </p:messages> 
-        
+	<p:growl showDetail="false" closable="true" sticky="true"/>
+
 	<div id="paginaLogin">
-	
-			<h:form>
+
+		<h:form>
+
+			<h3>Login</h3>
+
+			<h:panelGroup>
+
+				<p:inputText value="#{loginBean.usuario}" id="usuario"
+					pt:placeholder="Usuário" required="true"
+					requiredMessage="Informe o usuário." style="text-align:center; height: 20px" />
+
+				<p:password value="#{loginBean.senha}" id="senha"
+					pt:placeholder="Senha" required="true"
+					requiredMessage="Informe a senha." style="text-align:center; height: 20px" />
 					
-				<h5>LOGIN</h5>
-					
-				<h:panelGroup>
-				
-					<p:inputText value="#{loginBean.usuario}" id="usuario"
-						pt:placeholder="Usuário" required="true" requiredMessage="Informe o usuário." style="height: 20px"/>		
-							
-					<p:password value="#{loginBean.senha}" id="senha"
-						pt:placeholder="Senha" required="true" requiredMessage="Informe a senha." style="height: 20px"/>
-				</h:panelGroup>
-							
-				<h:panelGroup>
-					<p:commandButton value="Entrar"  actionListener="#{loginBean.autentica}" style="font-size: 18px" ajax="false"/>
-					&nbsp;&nbsp;
-					<p:commandButton value="Limpar" action="#{loginBean.limpar()}" style="font-size: 18px" immediate="true"/>
-				</h:panelGroup>
+			</h:panelGroup>
+
+			<div class="botoes">
+			<h:panelGroup>
+				<p:commandButton value="Entrar"
+					actionListener="#{loginBean.autentica}" update="growl-sticky"
+					style="font-size: 18px; width:250px;" ajax="false" />
+			</h:panelGroup>
+			</div>
 			
-			</h:form>
-		
+		</h:form>
+
 	</div>
-	
+
 </h:body>
 </html>

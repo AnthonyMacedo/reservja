@@ -3,7 +3,7 @@ body {
 	font-size: 110%;
 	margin: 0;
 	padding: 0;
-	background: #fcfcfc;
+	background: #eeeeee;
 	text-align: justify;
 }
 
@@ -15,7 +15,7 @@ body {
 	margin: 0 auto;
 	font-size: 60px;
 	color: #075FF4;
-}	
+}
 
 #cabecalho h1 {
 	color: #075FF4;
@@ -120,7 +120,7 @@ body {
 	width: 1005px;
 	background: #ffffff;
 	border-radius: 10px;
-	box-shadow: 0px 0px 10px #cccccc;
+	box-shadow: 8px 8px 10px #cccccc;
 }
 
 #conteudo {
@@ -134,7 +134,6 @@ body {
 #conteudo h1 {
 	margin: 0px;
 }
-
 
 #bemvindo_index {
 	float: left;
@@ -172,8 +171,10 @@ body {
 	padding: 10px;
 }
 
-#paginaLogin h5 {
+#paginaLogin h3 {
 	color: white;
+	margin-top: 0px;
+	margin-bottom: 20px;
 }
 
 #paginaLogin input {
@@ -272,6 +273,12 @@ body {
 	align-content: center !important;
 }
 
+#listaReservados table {
+	text-align: center !important;
+	font-size: 17px;
+	align-content: center !important;
+}
+
 #centralizar-conteudo {
 	padding-left: 93px;
 }
@@ -290,4 +297,3 @@ body {
     color: #000000 !important;
 }
 */
-

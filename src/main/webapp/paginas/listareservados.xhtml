@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<h:head></h:head>
+
+		<div class="card crud-demo" id="tabelaPrimefaces">
+
+			<h:form acceptcharset="UTF-8">
+
+			<div id="listaReservados">
+				<p:dataTable id="dtApartamentosReservados"
+					widgetVar="dtApartamentosReservados" var="apartamentosReservados"
+					value="#{reservasBean.listaReservas}" reflow="true"
+					styleClass="products-table"
+					rowKey="#{apartamentosReservados.idReserva}" paginator="true"
+					rows="10" style="font-size: 1rem" paginatorPosition="bottom">
+
+					<f:facet name="header">
+
+						<div class="products-table-header">
+							<span style="font-weight: bold">Apartamentos Reservados</span> <span
+								class="filter-container ui-input-icon-left">
+							</span>
+						</div>
+					</f:facet>
+					
+					<p:column headerText="Id" style="width: 50px">
+						<p:outputLabel value="#{apartamentosReservados.idReserva}" />
+					</p:column>
+
+					<p:column headerText="Cliente">
+						<p:outputLabel value="#{apartamentosReservados.cliente.nome}" />
+					</p:column>
+
+					<p:column headerText="Apartamento">
+						<p:outputLabel
+							value="#{apartamentosReservados.apartamento.numeroQuarto}" />
+					</p:column>
+
+					<p:column headerText="Status Apartamento">
+						<p:outputLabel
+							value="#{apartamentosReservados.apartamento.statusApartamento.descricao}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</div>
+			
+			</h:form>
+
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>

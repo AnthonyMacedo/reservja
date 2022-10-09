@@ -4,4 +4,5 @@ import com.reservja.model.entity.Reservas;
 
 public interface IReservasDAO extends IDAO<Reservas, Integer> {
 
+
 }

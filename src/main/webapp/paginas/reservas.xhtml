@@ -18,6 +18,8 @@
 
 		<h:form>
 
+			<p:growl id="growl" showDetail="true" />
+
 			<p:fieldset legend="Reservas"
 				style="border-radius: 10px; border-color: #75a7fb; font-size: 15px;">
 
@@ -25,31 +27,94 @@
 
 
 					<p:outputLabel value="Cliente " for="cliente" />
-						<p:column>
-							<p:inputText id="cliente" />
-							<p:commandButton oncomplete="PF('documentDialog').show()"
-							title="Buscar Cliente" icon="pi pi-search">
-							</p:commandButton>					
-						</p:column>
+					<p:column>
+
+						<p:inputText readonly="true" id="cliente" size="30"
+							value="#{reservasBean.reserva.cliente.nome}" required="true"/>
+
+						<p:commandButton id="buscarClienteBtn" type="button"
+							title="Buscar Cliente" icon="pi pi-search" />
+
+						<p:overlayPanel for="buscarClienteBtn" dynamic="true"
+							style="width:480px" widgetVar="clientePicker">
+
+							<p:dataTable id="dtCliente" var="cliente"
+								value="#{clienteBean.listaClientes}"
+								selection="#{clienteBean.clienteSelecionado}"
+								selectionMode="single" rows="5" paginator="true"
+								paginatorPosition="bottom" rowKey="#{cliente.idCliente}"
+								style="text-align: center">
+
+								<p:ajax event="rowSelect"
+									listener="#{reservasBean.onRowSelectCliente}"
+									oncomplete="PF('clientePicker').hide()" update="@form" />
+
+								<p:column headerText="Id">
+									<p:outputLabel value="#{cliente.idCliente}" />
+								</p:column>
+
+								<p:column headerText="Nome">
+									<p:outputLabel value="#{cliente.nome}" />
+								</p:column>
+
+								<p:column headerText="Sobrenome">
+									<p:outputLabel value="#{cliente.sobrenome}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:overlayPanel>
+					</p:column>
 
 					<p:outputLabel value="Apartamento " for="apartamento" />
-						<p:column>
-							
-							<p:inputText id="apartamento" />
-							<p:commandButton oncomplete="PF('documentDialog').show()"
-							title="Buscar Apartamento" icon="pi pi-search">
-							</p:commandButton>
-						</p:column>
-					
+					<p:column>
+
+						<p:inputText id="apartamento" size="30" readonly="true"
+							value="#{reservasBean.reserva.apartamento.numeroQuarto}" required="true" />
+
+						<p:commandButton id="buscarApartamentoBtn" type="button" 
+							title="Buscar Apartamento" icon="pi pi-search" />
+
+						<p:overlayPanel for="buscarApartamentoBtn" dynamic="true"
+							style="width: 350px" widgetVar="apartamentoPicker">
+
+							<p:dataTable id="dtApartamento" var="apartamento"
+								value="#{apartamentoBean.listaApartamentos}"
+								selection="#{reservasBean.apartamentoSelecionado}"
+								selectionMode="single" paginator="botton"
+								rowKey="#{apartamento.idApartamento}" style="text-align: center">
+
+								<p:ajax event="rowSelect"
+									listener="#{reservasBean.onRowSelectApartamento}"
+									oncomplete="PF('apartamentoPicker').hide()" update="@form" />
+
+								<p:column headerText="Quarto"
+									sortBy="#{apartamento.numeroQuarto}">
+									<p:outputLabel value="#{apartamento.numeroQuarto}" />
+								</p:column>
+
+								<p:column headerText="Status"
+									sortBy="#{apartamento.statusApartamento}">							
+									<p:outputLabel value="#{apartamento.statusApartamento.descricao}" />
+									
+								</p:column>
+
+							</p:dataTable>
+
+						</p:overlayPanel>
+					</p:column>
+
 
 					<div class="field col-12 md:col-4">
 
 						<p:outputLabel />
 						<p:outputLabel for="dataInicial" value="Data Inicial" />
-						<p:datePicker id="dataInicial" showIcon="true" locale="pt_BR" />
+						<p:datePicker id="dataInicial"
+							value="#{reservasBean.reserva.dataInicial}" showIcon="true"
+							locale="pt_BR" />
 
 						<p:outputLabel for="dataFinal" value="Data Final" />
-						<p:datePicker id="dataFinal" showIcon="true" />
+						<p:datePicker id="dataFinal"
+							value="#{reservasBean.reserva.dataFinal}" showIcon="true" />
 
 					</div>
 
@@ -58,9 +123,12 @@
 				<div class="botoes">
 					<h:panelGroup>
 
-						<p:commandButton id="reservar" value="Reservar" />
+						<p:commandButton id="reservar" value="Reservar"
+							actionListener="#{reservasBean.reservarQuarto}"
+							update="growl, @form" />
 								&nbsp;
-								<p:commandButton id="limpar" value="Limpar" type="reset" />
+						<p:commandButton id="limpar" value="Limpar" type="reset"
+							action="#{reservasBean.limpar}" />
 
 					</h:panelGroup>
 				</div>
