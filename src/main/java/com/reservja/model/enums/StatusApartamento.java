@@ -2,9 +2,9 @@ package com.reservja.model.enums;
 
 public enum StatusApartamento {
 	
-	DISPONIVEL("Disponível"),
-	OCUPADO("Ocupado"),
-	RESERVADO("Reservado");
+	Disponivel("Disponível"),
+	Ocupado("Ocupado"),
+	Reservado("Reservado");
 	
 	private String descricao;
 	

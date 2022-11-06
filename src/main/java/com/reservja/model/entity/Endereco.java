@@ -23,6 +23,9 @@ public class Endereco implements Serializable {
 
 	@Column(name = "LOGRADOURO")
 	private String logradouro;
+	
+	@Column(name = "NUMERO")
+	private String numero;
 
 	@Column(name = "COMPLEMENTO")
 	private String complemento;
@@ -42,24 +45,26 @@ public class Endereco implements Serializable {
 	public Endereco() {
 	}
 
-	public Endereco(String cep, String logradouro, String complemento, String municipio, String localidade, String bairro, String uf) {
+	public Endereco(String cep, String logradouro, String complemento,String numero, String municipio, String localidade, String bairro, String uf) {
 		super();
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
+		this.numero = numero;
 		this.municipio = municipio;
 		this.localidade = localidade;
 		this.bairro = bairro;
 		this.uf = uf;
 	}
 
-	public Endereco(Integer idEndereco, String cep, String logradouro, String complemento, String municipio,
+	public Endereco(Integer idEndereco, String cep, String logradouro, String complemento, String numero, String municipio,
 			String localidade, String bairro, String uf) {
 		super();
 		this.idEndereco = idEndereco;
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.complemento = complemento;
+		this.numero = numero;
 		this.municipio = municipio;
 		this.localidade = localidade;
 		this.bairro = bairro;
@@ -96,6 +101,14 @@ public class Endereco implements Serializable {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	public String getMunicipio() {

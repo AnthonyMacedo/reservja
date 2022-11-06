@@ -11,47 +11,50 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-	<title>BlueHawk</title>
-	<h:outputStylesheet library="css" name="estilo.css" />
+	<title>Blu Tech</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 
-<h:body>
+<h:body class="login-page">
 
-	<div id="cabecalho">
-		<p:graphicImage name="logo.png" library="img" />
-	</div>
+	<p:growl showDetail="false" closable="true" sticky="true" />
 
-	<p:growl showDetail="false" closable="true" sticky="true"/>
+	<div class="login-box">
 
-	<div id="paginaLogin">
+		<div class="login-logo">
+			<a>Blu Tech</a>
+		</div>
 
-		<h:form>
+		<div class="login-card ui-fluid">
 
-			<h3>Login</h3>
+			<h:form>
+				<p class="login-box-msg">Faça login para entrar.</p>
 
-			<h:panelGroup>
+					<p:panelGrid columns="1" layout="grid" styleClass="noBorder">
 
-				<p:inputText value="#{loginBean.usuario}" id="usuario"
-					pt:placeholder="Usuário" required="true"
-					requiredMessage="Informe o usuário." style="text-align:center; height: 20px" />
 
-				<p:password value="#{loginBean.senha}" id="senha"
-					pt:placeholder="Senha" required="true"
-					requiredMessage="Informe a senha." style="text-align:center; height: 20px" />
+						<p:inputText value="#{loginBean.usuario}" id="usuario"
+							pt:placeholder="Usuário" required="true" autocomplete="false"
+							requiredMessage="Informe o usuário." styleClass="ui-inputLogin"
+							style="margin-top: 5px;" />
+
+						<p:password value="#{loginBean.senha}" id="senha"
+							pt:placeholder="Senha" required="true"
+							requiredMessage="Informe a senha." styleClass="ui-inputLogin"
+							style="margin-top: 5px;" />
+
+						<p:commandButton value="Entrar" styleClass="ui-azul noBorder"
+							actionListener="#{loginBean.autentica}" update="growl-sticky"
+							style="margin-top: 5px" ajax="false" />
+
+					</p:panelGrid>
 					
-			</h:panelGroup>
+			</h:form>
 
-			<div class="botoes">
-			<h:panelGroup>
-				<p:commandButton value="Entrar"
-					actionListener="#{loginBean.autentica}" update="growl-sticky"
-					style="font-size: 18px; width:250px;" ajax="false" />
-			</h:panelGroup>
-			</div>
-			
-		</h:form>
+		</div>
+		<!-- Login Page -->
 
 	</div>
-
+	<!-- Login Box -->
 </h:body>
 </html>

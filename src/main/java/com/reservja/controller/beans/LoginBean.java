@@ -82,7 +82,7 @@ public class LoginBean implements Serializable {
 		nomeFuncionario = null;
 		usuario = null;
 		senha = null;		
-		return "/login.xhtml";
+		return "/login.xhtml?faces-redirect=true";
 	}
 
 	public void msg(String mensagem) {

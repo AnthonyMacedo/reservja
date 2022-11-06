@@ -47,7 +47,7 @@ public class ClienteBean implements Serializable {
 			this.listaClientes = null;
 			msg("Cliente cadastrado.");
 			cliente = new Cliente();
-			return "/paginas/cadastrarcliente.xhtml";
+			return "/paginas/cliente.xhtml";
 
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -60,26 +60,26 @@ public class ClienteBean implements Serializable {
 
 	public String limpar() {
 		cliente = new Cliente();
-		return "/paginas/cadastrarcliente.xhtml?faces-redirect=true";
+		return "/paginas/cliente.xhtml?faces-redirect=true";
 	}
 
 	public String remove() {
 		try {
 			iClienteDao.remove(Cliente.class, cliente.getIdCliente());
 			 msg("Registro removido.");
-			return "/paginas/listaclientes.xhtml?faces-redirect=true";
+			return "/paginas/lista-clientes.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			e.getStackTrace();
 			msg("Falha ao remover registro.");
 			System.out.println("Erro ao remover cliente.");
-			return "/paginas/listaclientes.xhtml?faces-redirect=true";
+			return "/paginas/lista-clientes.xhtml?faces-redirect=true";
 		}
 		
 	}
 
 	public String preparaAlteracao() {
 		this.cliente = iClienteDao.getById(Cliente.class, cliente.getIdCliente());
-		return "/paginas/cadastrarcliente.xhtml";
+		return "/paginas/cliente.xhtml";
 	}
 
 	

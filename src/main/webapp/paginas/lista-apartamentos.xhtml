@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<ui:composition template="/WEB-INF/templates/template.xhtml"
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,12 +10,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="conteudo">
+	<ui:define name="content">
 
 		<h:form acceptcharset="UTF-8">
+		
+			<div class="page-title">
+				<h1>Lista de Apartamentos</h1>
+			</div>
 
-			<div id="centralizar-conteudo">
-				<div id="listaApartamento" style="width: 800px;">
 					<p:dataTable id="dtApartamentos" widgetVar="dtApartamentos"
 						var="apartamento" value="#{apartamentoBean.listaApartamentos}"
 						reflow="true" styleClass="products-table" rowIndexVar="rowIndex"
@@ -35,10 +37,10 @@
 							sortBy="#{apartamento.qtdOcupantes}">
 							<p:outputLabel value="#{apartamento.qtdOcupantes}" />
 						</p:column>
-						<p:column style="width: 100px" headerText="Status"
+					<!-- 	<p:column style="width: 100px" headerText="Status"
 							sortBy="#{apartamento.statusApartamento}">
 							<p:outputLabel value="#{apartamento.statusApartamento.descricao}" />
-						</p:column>
+						</p:column>  -->
 
 						<p:column style="width: 80px" exportable="false">
 							<p:commandButton style="font-size: 1rem; color: blue"
@@ -54,8 +56,7 @@
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
-				</div>
-			</div>
+
 		</h:form>
 	</ui:define>
 

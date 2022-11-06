@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        
-<ui:composition template="/WEB-INF/templates/template.xhtml"
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,59 +10,72 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="conteudo">
-	
+	<ui:define name="content">
+
 		<h:form acceptcharset="UTF-8">
-			
-			<p:growl id="growl" showDetail="true" />
-        	<p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
-			
+
+			<div class="page-title">
+				<h1>Cadastro de apartamento</h1>
+			</div>
+
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="cliente" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="lista-clientes" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:growl id="growl" showDetail="false" />
+
 			<p:inputText id="idHidden" type="hidden"
 				value="#{apartamentoBean.apartamento.idApartamento}" />
 
-			<p:fieldset class="fieldset" legend="Cadastro de Apartamento"> 				
- 	
-				<p:panelGrid columns="2" styleClass="semBorda">
-	
-					<p:outputLabel for="apartamento" value="Número do quarto:" />
-					<p:inputNumber id="apartamento"
-						value="#{apartamentoBean.apartamento.numeroQuarto}" minValue="0"
-						maxValue="80" decimalPlaces="0" />
+				<p:tabView style="margin-top: 20px">
+					<p:tab title="Apartamento">
+						<p:panelGrid columns="2" styleClass="noBorder" layout="grid"
+							columnClasses="ui-grid-col-2, ui-grid-col-4">
+
+							<p:outputLabel for="apartamento" value="Número do quarto:" />
+							<p:inputNumber id="apartamento"
+								value="#{apartamentoBean.apartamento.numeroQuarto}" minValue="0"
+								maxValue="80" decimalPlaces="0" />
+
+							<p:outputLabel for="qtdOcupantes" value="Quantidade ocupantes:" />
+							<p:inputNumber id="qtdOcupantes"
+								value="#{apartamentoBean.apartamento.qtdOcupantes}" minValue="0"
+								maxValue="6" decimalPlaces="0" />
+
+							<p:outputLabel for="enumStatus" value="Status:" />
+							<p:selectOneMenu id="enumStatus"
+								value="#{apartamentoBean.apartamento.statusApartamento}"
+								required="true" style="width: 185px">
+								<f:selectItem itemLabel="Selecione" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{apartamentoBean.statusApartamento}"
+									var="enumStatus" itemLabel="#{enumStatus.descricao}"
+									itemValue="#{enumStatus}" />
+							</p:selectOneMenu>
 
 
-					<p:outputLabel for="qtdOcupantes" value="Quantidade ocupantes:" />
-					<p:inputNumber id="qtdOcupantes"
-						value="#{apartamentoBean.apartamento.qtdOcupantes}" minValue="0"
-						maxValue="6" decimalPlaces="0" />
-					<p:outputLabel/>
-					<h:panelGroup>
-						<div class="ui-fluid formgrid grid">
-							<div class="field col-12 md:col-4">
-								<p:outputLabel for="enumStatus" value="Status:" />								
-								<p:selectOneMenu id="enumStatus" value="#{apartamentoBean.apartamento.statusApartamento}" 
-								required="true">
-									<f:selectItem itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true"/>
-									<f:selectItems  value="#{apartamentoBean.statusApartamento}" var="enumStatus" 
-										itemLabel="#{enumStatus.descricao}" itemValue="#{enumStatus}"/>
-								</p:selectOneMenu>
-							</div>
-						</div>
-					</h:panelGroup>
-				</p:panelGrid>
+						</p:panelGrid>
+					</p:tab>
+				</p:tabView>
 				
-				<div class="botoes">	
-					<h:panelGroup>
-					
-						<p:commandButton value="Salvar" actionListener="#{apartamentoBean.salvar}" 
-							update="growl, @form" styleClass="mr-2"/>
-						&nbsp;
-						<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}" immediate="true" />	
-							
-					</h:panelGroup>
-				</div>
+			<div class="ui-buttons">
+				<h:panelGroup>
 
-			</p:fieldset>
+					<p:commandButton value="Salvar"
+						actionListener="#{apartamentoBean.salvar}" update="growl, @form"
+						styleClass="mr-2" />
 
+					<p:commandButton value="Limpar" action="#{apartamentoBean.limpar}"
+						immediate="true" />
+
+				</h:panelGroup>
+			</div>
 
 		</h:form>
 

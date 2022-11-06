@@ -77,10 +77,10 @@ public class ApartamentoBean implements Serializable {
 		
 		try {
 			iApartamentoDao.remove(Apartamento.class, apartamento.getIdApartamento());
-			return "/paginas/lista_apartamentos.xhtml?faces-redirect=true";
+			return "/paginas/lista-apartamentos.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			msg("Apartamento removido.");
-			return "/paginas/lista_apartamentos.xhtml?faces-redirect=true";
+			return "/paginas/lista-apartamentos.xhtml?faces-redirect=true";
 		}
 		
 	}

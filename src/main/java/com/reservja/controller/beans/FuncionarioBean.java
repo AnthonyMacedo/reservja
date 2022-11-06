@@ -44,7 +44,7 @@ public class FuncionarioBean implements Serializable {
 			funcionario = new Funcionario();
 			this.listaFuncionarios = null;
 			msg("Funcionário cadastrado.");
-			return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
+			return "/paginas/funncionario.xhtml?faces-redirect=true";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,7 +55,7 @@ public class FuncionarioBean implements Serializable {
 
 	public String limpar() {
 		funcionario = new Funcionario();
-		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
+		return "/paginas/funncionario.xhtml?faces-redirect=true";
 	}
 
 	public void remove() {
@@ -64,7 +64,7 @@ public class FuncionarioBean implements Serializable {
 
 	public String preparaAlteracao() {
 		this.funcionario = iFuncionarioDao.getById(Funcionario.class, funcionario.getIdFuncionario());
-		return "/paginas/cadastrarfuncionario.xhtml?faces-redirect=true";
+		return "/paginas/funncionario.xhtml?faces-redirect=true";
 	}
 
 	public List<Funcionario> getListaFuncionarios() {

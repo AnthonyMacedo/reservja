@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<ui:composition template="/WEB-INF/templates/template.xhtml"
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,11 +10,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="conteudo">
+	<ui:define name="content">
 
 		<div class="card crud-demo" id="tabelaPrimefaces">
-
-			<h:form acceptcharset="UTF-8">
+			
+			<div class="page-title">
+				<h1>Lista de clientes</h1>
+			</div>	
+			
+			<h:form acceptcharset="UTF-8" style=" text-align: center;">
 			
 				<p:growl id="growl" showDetail="true" />
 				
@@ -25,44 +29,45 @@
 					paginatorPosition="bottom">
 					<p:growl id="growl" showDetail="false" />
 
-					<f:facet name="header">
-						<div class="products-table-header">
+					<f:facet name="header" >			
+						
+						<div class="products-table-header" align="right" style="padding: 5px">
 							<span style="font-weight: bold">Clientes</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar	" />
+									onkeyup="PF('dtClientes').filter()" placeholder="Pesquisar" />
 							</span>
 						</div>
 					</f:facet>
 
-					<p:column style="width: 37px;" headerText="Id"
+					<p:column  headerText="Id" style="width: 5%"
 						sortBy="#{cliente.idCliente}">
 						<h:outputText value="#{cliente.idCliente}" />
 					</p:column>
 
-					<p:column style="width: 85px;" headerText="Nome"
+					<p:column headerText="Nome"
 						sortBy="#{cliente.nome}">
 						<h:outputText value="#{cliente.nome}" />
 					</p:column>
 
-					<p:column style="width: 130px;" headerText="Sobrenome"
-						sortBy="#{cliente.sobrenome}">
-						<h:outputText value="#{cliente.sobrenome}" />
+					<p:column headerText="CPF"
+						sortBy="#{cliente.cpf}">
+						<h:outputText value="#{cliente.cpf}" />
 					</p:column>
 
-					<p:column style="width: 250px;" headerText="Email"
+					<p:column headerText="Email"
 						sortBy="#{cliente.email}">
 						<h:outputText value="#{cliente.email}" />
 					</p:column>
 
-					<p:column style="text-align: center;" headerText="Data Nascimento"
+					<p:column headerText="Data Nascimento"
 						sortBy="#{cliente.dataNascimento}">
 						<h:outputText value="#{cliente.dataNascimento}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
-					<p:column style="width: 100px;" exportable="false">
+					<p:column exportable="false">
 
 						<p:commandButton style="font-size: 1rem; color: blue;"
 							icon="pi pi-pencil" action="#{clienteBean.preparaAlteracao}">

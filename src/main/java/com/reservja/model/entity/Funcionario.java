@@ -22,27 +22,36 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FUNC")
 	private Integer idFuncionario;
-	
+
 	@Column(name = "NOME")
 	private String nome;
-	
-	@Column(name = "SOBRENOME")
-	private String sobrenome;
-	
+
+	@Column(name = "CPF")
+	private String cpf;
+
+	@Column(name = "SEXO")
+	private String sexo;
+
 	@Column(name = "EMAIL")
 	private String email;
-	
+
+	@Column(name = "TELEFONE")
+	private String telefone;
+
+	@Column(name = "CELULAR")
+	private String celular;
+
 	@Column(name = "DATA_NASCIMENTO")
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ENDERECO")
 	private Endereco endereco;
-	
+
 	@Column(unique = true, name = "USUARIO")
 	private String usuario;
-	
+
 	@Column(name = "SENHA")
 	private String senha;
 
@@ -50,25 +59,31 @@ public class Funcionario implements Serializable {
 		endereco = new Endereco();
 	}
 
-	public Funcionario(String nome, String sobrenome, String email, Date dataNascimento, Endereco endereco,
-			String usuario, String senha) {
+	public Funcionario(String nome, String cpf, String sexo, String email, String telefone, String celular,
+			Date dataNascimento, Endereco endereco, String usuario, String senha) {
 		super();
 		this.nome = nome;
-		this.sobrenome = sobrenome;
+		this.cpf = cpf;
+		this.sexo = sexo;
 		this.email = email;
+		this.telefone = telefone;
+		this.celular = celular;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.usuario = usuario;
 		this.senha = senha;
 	}
 
-	public Funcionario(Integer idFuncionario, String nome, String sobrenome, String email, Date dataNascimento,
-			Endereco endereco, String usuario, String senha) {
+	public Funcionario(Integer idFuncionario, String nome, String cpf, String sexo, String email, String telefone,
+			String celular, Date dataNascimento, Endereco endereco, String usuario, String senha) {
 		super();
 		this.idFuncionario = idFuncionario;
 		this.nome = nome;
-		this.sobrenome = sobrenome;
+		this.cpf = cpf;
+		this.sexo = sexo;
 		this.email = email;
+		this.telefone = telefone;
+		this.celular = celular;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
 		this.usuario = usuario;
@@ -91,12 +106,20 @@ public class Funcionario implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getEmail() {
@@ -107,6 +130,22 @@ public class Funcionario implements Serializable {
 		this.email = email;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
@@ -114,7 +153,7 @@ public class Funcionario implements Serializable {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
